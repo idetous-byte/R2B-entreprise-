@@ -1,697 +1,381 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="fr">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>R2B Entreprise - Terrains</title>
+    <title>R2B Entreprise - Terrains</title>
 
-<link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="Style.css">
 
-<style>
+    <style>
 
-    body,
-    button,
-    input {
-        font-family: 'Calibri', 'Segoe UI', sans-serif;
-    }
+        body,
+        button,
+        input {
+            font-family: 'Calibri', 'Segoe UI', sans-serif;
+        }
 
+        /* =====================================
+           ÉCRAN DE DÉMARRAGE R2B
+           ===================================== */
 
-    /* =====================================
-       ÉCRAN DE DÉMARRAGE R2B
-       ===================================== */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
 
-    #splash-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-        position: fixed;
+            background: #000000;
 
-        top: 0;
-        left: 0;
+            z-index: 99999;
 
-        width: 100%;
-        height: 100vh;
+            opacity: 1;
+            visibility: visible;
 
-        display: flex;
+            transition: opacity 0.5s ease;
+        }
 
-        align-items: center;
-        justify-content: center;
+        .splash-box {
+            border: 2px solid #ffffff;
 
-        background: #000000;
+            padding: 30px 45px;
 
-        z-index: 99999;
+            text-align: center;
 
-        opacity: 1;
+            background: #000000;
 
-        visibility: visible;
+            border-radius: 12px;
 
-        transition: opacity 0.5s ease;
+            box-shadow:
+                0 0 25px rgba(255,255,255,0.25);
 
-        font-family: 'Calibri', 'Segoe UI', sans-serif;
-    }
+            min-width: 180px;
+        }
 
+        .splash-box h1 {
+            margin: 0;
 
-    .splash-box {
+            color: #ffffff;
 
-        border: 2px solid #ffffff;
+            font-size: 55px;
 
-        padding: 30px 45px;
+            font-weight: bold;
 
-        text-align: center;
+            letter-spacing: 5px;
+        }
 
-        background: #000000;
+        .splash-divider {
+            width: 80px;
+            height: 2px;
 
-        border-radius: 12px;
+            background: #ffffff;
 
-        box-shadow:
-            0 0 25px rgba(255,255,255,0.25);
+            margin: 12px auto;
+        }
 
-        min-width: 180px;
-    }
+        .splash-box p {
+            margin: 0;
 
+            color: #ffffff;
 
-    .splash-box h1 {
+            font-size: 22px;
 
-        margin: 0;
+            letter-spacing: 2px;
+        }
 
-        color: #ffffff;
+        /* =====================================
+           FENÊTRE FLOTTANTE
+           ===================================== */
 
-        font-family: 'Calibri', 'Segoe UI', sans-serif;
+        .fenetre-flottante {
+            display: none;
 
-        font-size: 55px;
+            position: fixed;
 
-        font-weight: bold;
+            top: 15%;
+            left: 5%;
 
-        letter-spacing: 5px;
-    }
+            width: 90%;
+            max-width: 360px;
 
+            background: #ffffff;
 
-    .splash-divider {
+            border: 2px solid #000000;
 
-        width: 80px;
+            border-radius: 12px;
 
-        height: 2px;
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.4);
 
-        background: #ffffff;
+            z-index: 10005;
 
-        margin: 12px auto;
-    }
+            touch-action: none;
+        }
 
+        .barre-deplacement {
+            background: #000000;
 
-    .splash-box p {
+            color: #ffffff;
 
-        margin: 0;
+            padding: 12px;
 
-        color: #ffffff;
+            cursor: move;
 
-        font-family: 'Calibri', 'Segoe UI', sans-serif;
+            font-weight: bold;
 
-        font-size: 22px;
+            display: flex;
 
-        font-weight: normal;
+            justify-content: space-between;
 
-        letter-spacing: 2px;
-    }
+            align-items: center;
 
+            user-select: none;
+        }
 
-    /* =====================================
-       FENÊTRE FLOTTANTE
-       ===================================== */
+        .bouton-fermer {
+            cursor: pointer;
 
-    .fenetre-flottante {
+            font-size: 1.5rem;
 
-        display: none;
+            padding: 0 5px;
+        }
 
-        position: fixed;
+        .contenu-formulaire {
+            padding: 15px;
+        }
 
-        top: 15%;
-        left: 5%;
+        .details-terrain-choisi {
+            background: #f8f9fa;
 
-        width: 90%;
+            padding: 8px 12px;
 
-        max-width: 360px;
+            border-radius: 6px;
 
-        background: #ffffff;
+            margin-bottom: 12px;
 
-        border: 2px solid #000000;
+            font-size: 0.95rem;
 
-        border-radius: 12px;
+            border-left: 4px solid #000;
+        }
 
-        box-shadow:
-            0 10px 30px rgba(0,0,0,0.4);
+        .ligne-saisie {
+            margin-bottom: 10px;
+        }
 
-        z-index: 10005;
+        .ligne-saisie label {
+            display: block;
 
-        touch-action: none;
-    }
+            font-size: 0.9rem;
 
+            font-weight: bold;
 
-    .barre-deplacement {
+            margin-bottom: 3px;
+        }
 
-        background: #000000;
+        .ligne-saisie input {
+            width: 100%;
 
-        color: #ffffff;
+            padding: 8px;
 
-        padding: 12px;
+            border: 1px solid #ccc;
 
-        cursor: move;
+            border-radius: 6px;
 
-        font-weight: bold;
+            box-sizing: border-box;
+        }
 
-        display: flex;
+        .btn-soumettre {
+            width: 100%;
 
-        justify-content: space-between;
+            background: #000000;
 
-        align-items: center;
+            color: #ffffff;
 
-        user-select: none;
-    }
+            border: none;
 
+            padding: 12px;
 
-    .bouton-fermer {
+            border-radius: 6px;
 
-        cursor: pointer;
+            font-weight: bold;
 
-        font-size: 1.5rem;
+            text-transform: uppercase;
 
-        padding: 0 5px;
-    }
+            cursor: pointer;
+        }
 
+        .message-vide {
+            text-align: center;
 
-    .contenu-formulaire {
+            background: white;
 
-        padding: 15px;
-    }
+            padding: 25px;
 
+            border-radius: 10px;
 
-    .details-terrain-choisi {
+            margin: 20px 0;
 
-        background: #f8f9fa;
+            color: #555;
+        }
 
-        padding: 8px 12px;
+    </style>
 
-        border-radius: 6px;
+</head>
 
-        margin-bottom: 12px;
+<body>
 
-        font-size: 0.95rem;
+    <!-- =====================================
+         ÉCRAN DE DÉMARRAGE
+         ===================================== -->
 
-        border-left: 4px solid #000;
-    }
+    <div id="splash-screen">
 
+        <div class="splash-box">
 
-    .ligne-saisie {
+            <h1>R2B</h1>
 
-        margin-bottom: 10px;
-    }
+            <div class="splash-divider"></div>
 
+            <p>Entreprise</p>
 
-    .ligne-saisie label {
-
-        display: block;
-
-        font-size: 0.9rem;
-
-        font-weight: bold;
-
-        margin-bottom: 3px;
-    }
-
-
-    .ligne-saisie input {
-
-        width: 100%;
-
-        padding: 8px;
-
-        border: 1px solid #ccc;
-
-        border-radius: 6px;
-
-        box-sizing: border-box;
-    }
-
-
-    .btn-soumettre {
-
-        width: 100%;
-
-        background: #000000;
-
-        color: #ffffff;
-
-        border: none;
-
-        padding: 12px;
-
-        border-radius: 6px;
-
-        font-weight: bold;
-
-        text-transform: uppercase;
-
-        cursor: pointer;
-    }
-
-</style>
-
-</head><body><!-- =====================================
-     ÉCRAN DE DÉMARRAGE
-     ===================================== -->
-
-<div id="splash-screen">
-
-    <div class="splash-box">
-
-        <h1>R2B</h1>
-
-        <div class="splash-divider"></div>
-
-        <p>Entreprise</p>
-
-    </div>
-
-</div>
-
-
-<!-- =====================================
-     PANIER
-     ===================================== -->
-
-<div
-    id="client-cart"
-    class="cart-icon"
-    onclick="ouvrirPanier()">
-
-    🛒
-
-    <span id="cart-count">
-        0
-    </span>
-
-</div>
-
-
-<!-- =====================================
-     EN-TÊTE
-     ===================================== -->
-
-<header>
-
-    <div class="main-header-title">
-
-        AVEC R2B ENTREPRISE
+        </div>
 
     </div>
 
 
-    <p class="main-subtitle">
-
-        Construisez l'avenir dans le présent
-        en achetant des terrains à très bon prix.
-
-    </p>
-
-</header>
-
-
-<!-- =====================================
-     TERRAINS
-     ===================================== -->
-
-<main>
+    <!-- =====================================
+         PANIER
+         ===================================== -->
 
     <div
-        id="terrains-container"
-        class="terrains-grid">
+        id="client-cart"
+        class="cart-icon"
+        onclick="ouvrirPanier()">
 
-    </div>
+        🛒
 
-</main>
-
-
-<!-- =====================================
-     FENÊTRE DE COMMANDE
-     ===================================== -->
-
-<div
-    id="popup-commande"
-    class="fenetre-flottante">
-
-
-    <div
-        id="barre-tactile"
-        class="barre-deplacement">
-
-
-        <span>
-
-            🖐️ Glissez ici pour déplacer
-
-        </span>
-
-
-        <span
-            class="bouton-fermer"
-            onclick="fermerPanier()">
-
-            &times;
-
-        </span>
-
+        <span id="cart-count">0</span>
 
     </div>
 
 
-    <div class="contenu-formulaire">
+    <!-- =====================================
+         EN-TÊTE
+         ===================================== -->
 
+    <header>
+
+        <div class="main-header-title">
+            AVEC R2B ENTREPRISE
+        </div>
+
+        <p class="main-subtitle">
+
+            Construisez l'avenir dans le présent
+            en achetant des terrains à très bon prix.
+
+        </p>
+
+    </header>
+
+
+    <!-- =====================================
+         TERRAINS
+         ===================================== -->
+
+    <main>
 
         <div
-            id="cart-details"
-            class="details-terrain-choisi">
+            id="terrains-container"
+            class="terrains-grid">
+
+            <div class="message-vide">
+                Chargement des terrains...
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================
+         FENÊTRE DE COMMANDE
+         ===================================== -->
+
+    <div
+        id="popup-commande"
+        class="fenetre-flottante">
+
+        <div
+            id="barre-tactile"
+            class="barre-deplacement">
+
+            <span>
+                🖐️ Glissez ici pour déplacer
+            </span>
+
+            <span
+                class="bouton-fermer"
+                onclick="fermerPanier()">
+
+                &times;
+
+            </span>
 
         </div>
 
 
-        <div class="ligne-saisie">
+        <div class="contenu-formulaire">
 
-            <label>
-                Nom et Prénom
-            </label>
+            <div
+                id="cart-details"
+                class="details-terrain-choisi">
 
-            <input
-                type="text"
-                id="client-name"
-                placeholder="Votre nom">
+            </div>
 
-        </div>
 
+            <div class="ligne-saisie">
 
-        <div class="ligne-saisie">
+                <label>
+                    Nom et Prénom
+                </label>
 
-            <label>
-                Numéro Appel Direct
-            </label>
+                <input
+                    type="text"
+                    id="client-name"
+                    placeholder="Votre nom">
 
-            <input
-                type="tel"
-                id="client-phone"
-                placeholder="Ex: 0707070707">
+            </div>
 
-        </div>
 
+            <div class="ligne-saisie">
 
-        <div class="ligne-saisie">
+                <label>
+                    Numéro Appel Direct
+                </label>
 
-            <label>
-                Numéro WhatsApp
-            </label>
+                <input
+                    type="tel"
+                    id="client-phone"
+                    placeholder="Ex: 0707070707">
 
-            <input
-                type="tel"
-                id="client-whatsapp"
-                placeholder="Ex: 0505050505">
+            </div>
 
-        </div>
 
+            <div class="ligne-saisie">
 
-        <div class="ligne-saisie">
+                <label>
+                    Numéro WhatsApp
+                </label>
 
-            <label>
-                Numéro Fixe
-            </label>
-
-            <input
-                type="tel"
-                id="client-fixe"
-                placeholder="Ex: 2727272727">
-
-        </div>
-
-
-        <div class="ligne-saisie">
-
-            <label>
-                Autre moyen où vous êtes joignable
-            </label>
-
-            <input
-                type="text"
-                id="client-autre"
-                placeholder="Ex: Facebook, Email...">
-
-        </div>
-
-
-        <button
-            class="btn-soumettre"
-            onclick="validerEtEnvoyerCommande()">
-
-            Envoyer
-
-        </button>
-
-
-    </div>
-
-</div>
-
-
-<!-- =====================================
-     PIED DE PAGE
-     ===================================== -->
-
-<footer>
-
-    <div id="google_translate_element"></div>
-
-
-    <div class="footer-info">
-
-        <h3>
-            R2B Entreprise
-        </h3>
-
-
-        <p>
-            📍 Notre base : Nagnenefou,
-            non loin de la maternité
-        </p>
-
-
-        <p class="copyright">
-
-            &copy; 2026 R2B Entreprise.
-            Tous droits réservés.
-
-        </p>
-
-    </div>
-
-</footer>
-
-
-<!-- =====================================
-     GOOGLE TRADUCTION
-     ===================================== -->
-
-<script>
-
-    function googleTranslateElementInit() {
-
-        new google.translate.TranslateElement(
-
-            {
-
-                pageLanguage: 'fr',
-
-                layout:
-                    google.translate.TranslateElement
-                    .InlineLayout.SIMPLE
-
-            },
-
-            'google_translate_element'
-
-        );
-
-    }
-
-</script>
-
-
-<script
-    type="text/javascript"
-    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-</script>
-
-
-<!-- =====================================
-     FIREBASE
-     IMPORTANT : AVANT Script.js
-     ===================================== -->
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
-
-
-<!-- =====================================
-     SCRIPT PRINCIPAL
-     ===================================== -->
-
-<script src="Script.js"></script>
-
-
-<!-- =====================================
-     DÉPLACEMENT DE LA FENÊTRE
-     ===================================== -->
-
-<script>
-
-    const el =
-        document.getElementById(
-            "popup-commande"
-        );
-
-
-    const barre =
-        document.getElementById(
-            "barre-tactile"
-        );
-
-
-    let estEnTrainDeGlisser = false;
-
-
-    let xInitial = 0;
-
-    let yInitial = 0;
-
-
-    let xActuel = 0;
-
-    let yActuel = 0;
-
-
-    if (barre) {
-
-        barre.addEventListener(
-            "touchstart",
-            function(e) {
-
-                estEnTrainDeGlisser = true;
-
-                xInitial =
-                    e.touches[0].clientX
-                    - xActuel;
-
-                yInitial =
-                    e.touches[0].clientY
-                    - yActuel;
-
-            },
-            {
-                passive: true
-            }
-        );
-
-
-        document.addEventListener(
-            "touchmove",
-            function(e) {
-
-                if (!estEnTrainDeGlisser) return;
-
-                xActuel =
-                    e.touches[0].clientX
-                    - xInitial;
-
-                yActuel =
-                    e.touches[0].clientY
-                    - yInitial;
-
-
-                if (el) {
-
-                    el.style.transform =
-                        `translate3d(
-                            ${xActuel}px,
-                            ${yActuel}px,
-                            0
-                        )`;
-
-                }
-
-            },
-            {
-                passive: false
-            }
-        );
-
-
-        document.addEventListener(
-            "touchend",
-            function() {
-
-                estEnTrainDeGlisser = false;
-
-            }
-        );
-
-
-        barre.addEventListener(
-            "mousedown",
-            function(e) {
-
-                estEnTrainDeGlisser = true;
-
-                xInitial =
-                    e.clientX - xActuel;
-
-                yInitial =
-                    e.clientY - yActuel;
-
-            }
-        );
-
-
-        document.addEventListener(
-            "mousemove",
-            function(e) {
-
-                if (!estEnTrainDeGlisser) return;
-
-                xActuel =
-                    e.clientX - xInitial;
-
-                yActuel =
-                    e.clientY - yInitial;
-
-
-                if (el) {
-
-                    el.style.transform =
-                        `translate3d(
-                            ${xActuel}px,
-                            ${yActuel}px,
-                            0
-                        )`;
-
-                }
-
-            }
-        );
-
-
-        document.addEventListener(
-            "mouseup",
-            function() {
-
-                estEnTrainDeGlisser = false;
-
-            }
-        );
-
-    }
-
-</script>
-
-</body></html>
+                <input
+                    type="tel"
+                    id="client-whatsapp"
+                    placeholder="Ex: 050505
