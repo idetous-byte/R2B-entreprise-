@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R2B - Espace Chef</title>
+    <style>
+        body { font-family: 'Calibri', sans-serif; padding: 20px; background: #f4f6f9; max-width: 700px; margin: 0 auto; position: relative; }
+        h1 { text-align: center; color: #000; margin-top: 60px; }
+        
+        /* Bouton Trois Tirets Épuré */
+        .icon-hamburger {
+            position: absolute; top: 20px; left: 20px;
+            background: #000; color: white; border: none;
+            width: 50px; height: 50px; font-size: 1.8rem;
+            border-radius: 8px; cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .badge-rouge {
+            position: absolute; top: -5px; right: -5px;
+            background: red; color: white; border-radius: 50%;
+            width: 22px; height: 22px; font-size: 0.8rem;
+            font-weight: bold; display: flex; justify-content: center; align-items: center;
+        }
+
+        .box { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; margin-top: 25px; }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; }
+        input { width: 100%; padding: 12px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 8px; }
+        button.btn-block { width: 100%; padding: 14px; background: #000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        
+        /* Nouvelle Page de gestion coulissante complète */
+        .page-gestion {
+            display: none; background: #ffffff; padding: 25px;
+            border-radius: 14px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-top: 20px; border: 1px solid #ddd;
+        }
+
+        .list-item { background: #f8f9fa; border: 1px solid #eee; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-del { background: #dc3545; color: white; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; }
+        
+        /* Fiche de notification rouge vif */
+        .card-notif-client {
+            background: #fff5f5; border-left: 6px solid #e53e3e;
+            padding: 20px; border-radius: 8px; margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(229,62,62,0.1);
+        }
+        .action-box { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-action { flex: 1; padding: 10px; border: none; border-radius: 6px; font-weight: bold; text-align: center; text-decoration: none; color: white; cursor: pointer; }
+        .btn-call { background: #007bff; }
+        .btn-wa-action { background: #25D366; }
+    </style>
+</head>
+<body>
+
+    <!-- Bouton Trois tirets avec notification rouge dynamique officielle -->
+    <button class="icon-hamburger" onclick="ouvrirPageGestion()">
+        ☰ <div id="admin-badge" class="badge-rouge" style="display:none;">0</div>
+    </button>
+
+    <h1>R2B - Ajouter un Terrain</h1>
+    
+    <div class="box">
+        <label>Superficie (ex: 500 m²)</label>
+        <input type="text" id="sup" placeholder="Ex: 500 m²">
+        <label>Localisation (ex: Karakoro)</label>
+        <input type="text" id="loc" placeholder="Ex: Karakoro">
+        <label>Prix en FCFA</label>
+        <input type="text" id="prix" placeholder="Ex: 7500000">
+        <button class="btn-block" onclick="ajouterTerrain()">Mettre en ligne le terrain</button>
+    </div>
+
+    <!-- La page de traitement qui s'ouvre via les 3 tirets -->
+    <div id="page-gestion-container" class="page-gestion">
+        <h2 style="color:red; margin-bottom:15px;">🚨 Nouvelles Commandes Clients</h2>
+        <div id="liste-commandes-reçues"></div>
+
+        <h2 style="margin-top:40px; margin-bottom:15px;">📦 Liste de vos Terrains en Vente</h2>
+        <div id="liste-terrains-gestion"></div>
+    </div>
+
+    <script>
+        function ouvrirPageGestion() {
+            const p = document.getElementById('page-gestion-container');
+            p.style.display = p.style.display === 'block' ? 'none' : 'block';
+            verifierEtMettreAJour();
+        }
+
+        function verifierEtMettreAJour() {
+            const commandes = JSON.parse(localStorage.getItem('r2b_commandes') || '[]');
+            const badge = document.getElementById('admin-badge');
+            
+            // Gestion du badge rouge
+            if (commandes.length > 0) {
+                badge.innerText = commandes.length;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+
+            // Affichage des fiches clients reçues
+            const divCmd = document.getElementById('liste-commandes-reçues');
+            divCmd.innerHTML = commandes.length === 0 ? "<p>Aucune notification de commande.</p>" : "";
+            commandes.forEach((c, index) => {
+                const textWhatsApp = encodeURIComponent(`Bonjour ${c.nom}, R2B Entreprise a bien reçu votre commande pour le terrain de ${c.localisation} (Terrain ${c.terrain}). Quand seriez-vous disponible pour une visite ?`);
+                
+                divCmd.innerHTML += `
+                    <div class="card-notif-client">
+                        <h3>🔴 Commande reçue le ${c.date}</h3>
+                        <p><strong>Client :</strong> ${c.nom}</p>
+                        <p><strong>Terrain demandé :</strong> Numéro ${c.terrain} à ${c.localisation}</p>
+                        <p><strong>Prix convenu :</strong> ${c.prix} FCFA</p>
+                        <div class="action-box">
+                            <a href="tel:${c.telephone}" class="btn-action btn-call">📞 Appeler Direct</a>
+                            <a href="https://wa.me{c.whatsapp}?text=${textWhatsApp}" target="_blank" class="btn-action btn-wa-action">💬 Écrire sur WhatsApp</a>
+                            <button class="btn-del" onclick="supprimerCommande(${index})">Archiver</button>
+                        </div>
+                    </div>`;
+            });
+
+            // Affichage des terrains
+            const terrains = JSON.parse(localStorage.getItem('r2b_terrains') || '[]');
+            const divTer = document.getElementById('liste-terrains-gestion');
+            divTer.innerHTML = terrains.length === 0 ? "<p>Aucun terrain en vente.</p>" : "";
+            terrains.forEach((t, i) => {
+                divTer.innerHTML += `
+                    <div class="list-item">
+                        <span><strong>Terrain ${i+1}</strong> - ${t.localisation} (${t.superficie})</span>
+                        <button class="btn-del" onclick="supprimerTerrain(${i})">Retirer du catalogue</button>
+                    </div>`;
+            });
+        }
+
+        function ajouterTerrain() {
+            const superficie = document.getElementById('sup').value;
+            const localisation = document.getElementById('loc').value;
+            const prix = document.getElementById('prix').value;
+            if(!superficie || !localisation || !prix) return alert("Veuillez tout remplir !");
+            
+            const list = JSON.parse(localStorage.getItem('r2b_terrains') || '[]');
+            list.push({ superficie, localisation, prix });
+            localStorage.setItem('r2b_terrains', JSON.stringify(list));
+            
+            document.getElementById('sup').value = '';
+            document.getElementById('loc').value = '';
+            document.getElementById('prix').value = '';
+            alert("Terrain ajouté avec succès !");
+            verifierEtMettreAJour();
+        }
+
+        function supprimerTerrain(i) {
+            const list = JSON.parse(localStorage.getItem('r2b_terrains') || '[]');
+            list.splice(i, 1);
+            localStorage.setItem('r2b_terrains', JSON.stringify(list));
+            verifierEtMettreAJour();
+        }
+
+        function supprimerCommande(i) {
+            const list = JSON.parse(localStorage.getItem('r2b_commandes') || '[]');
+            list.splice(i, 1);
+            localStorage.setItem('r2b_commandes', JSON.stringify(list));
+            verifierEtMettreAJour();
+        }
+
+        // Cycle de vérification automatique permanent
+        window.onload = verifierEtMettreAJour;
+        setInterval(verifierEtMettreAJour, 2000); // Rafraîchit toutes les 2 secondes pour être sûr que le rouge apparaisse
+    </script>
+</body>
+</html>

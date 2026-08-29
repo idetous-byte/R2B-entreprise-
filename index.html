@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R2B Entreprise - Terrains</title>
+    <link rel="stylesheet" href="Style.css">
+    <style>
+        body, button, input { font-family: 'Calibri', 'Segoe UI', sans-serif; }
+        
+        /* Fenêtre flottante compacte */
+        .fenetre-flottante {
+            display: none;
+            position: fixed;
+            top: 15%;
+            left: 5%;
+            width: 90%;
+            max-width: 360px;
+            background: #ffffff;
+            border: 2px solid #000000;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            z-index: 10005;
+            touch-action: none; /* Bloque le défilement de la page pendant qu'on glisse */
+        }
+
+        /* Zone d'accroche pour glisser */
+        .barre-deplacement {
+            background: #000000;
+            color: #ffffff;
+            padding: 12px;
+            cursor: move;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .bouton-fermer {
+            cursor: pointer;
+            font-size: 1.5rem;
+            padding: 0 5px;
+        }
+
+        .contenu-formulaire { padding: 15px; }
+        .details-terrain-choisi {
+            background: #f8f9fa; padding: 8px 12px; border-radius: 6px;
+            margin-bottom: 12px; font-size: 0.95rem; border-left: 4px solid #000;
+        }
+        .ligne-saisie { margin-bottom: 10px; }
+        .ligne-saisie label { display: block; font-size: 0.9rem; font-weight: bold; margin-bottom: 3px; }
+        .ligne-saisie input { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        .btn-soumettre { width: 100%; background: #000; color: #fff; border: none; padding: 12px; border-radius: 6px; font-weight: bold; text-transform: uppercase; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <!-- ÉCRAN DE DÉMARRAGE -->
+    <div id="splash-screen">
+        <div class="splash-box">
+            <h1>R2B</h1>
+            <div class="splash-divider"></div>
+            <p>Entreprise</p>
+        </div>
+    </div>
+
+    <!-- PANIER FLOTTANT -->
+    <div id="client-cart" class="cart-icon" onclick="ouvrirPanier()">
+        🛒 <span id="cart-count">0</span>
+    </div>
+
+    <!-- EN-TÊTE -->
+    <header>
+        <div class="main-header-title">AVEC R2B ENTREPRISE</div>
+        <p class="main-subtitle">Construisez l'avenir dans le présent en achetant des terrains à très bon prix.</p>
+    </header>
+
+    <!-- GRILLE DES TERRAINS -->
+    <main>
+        <div id="terrains-container" class="terrains-grid"></div>
+    </main>
+
+    <!-- MENU FLOTTANT TOTALEMENT MOBILE -->
+    <div id="popup-commande" class="fenetre-flottante">
+        <div id="barre-tactile" class="barre-deplacement">
+            <span>🖐️ Glissez ici pour déplacer</span>
+            <span class="bouton-fermer" onclick="fermerPanier()">&times;</span>
+        </div>
+        
+        <div class="contenu-formulaire">
+            <div id="cart-details" class="details-terrain-choisi"></div>
+            
+            <div class="ligne-saisie">
+                <label>Nom et Prénom</label>
+                <input type="text" id="client-name" placeholder="Votre nom">
+            </div>
+            <div class="ligne-saisie">
+                <label>Numéro Appel Direct</label>
+                <input type="tel" id="client-phone" placeholder="Ex: 0707070707">
+            </div>
+            <div class="ligne-saisie">
+                <label>Numéro WhatsApp</label>
+                <input type="tel" id="client-whatsapp" placeholder="Ex: 0505050505">
+            </div>
+            <div class="ligne-saisie">
+                <label>Numéro Fixe</label>
+                <input type="tel" id="client-fixe" placeholder="Ex: 2727272727">
+            </div>
+            <div class="ligne-saisie">
+                <label>Autre moyen où vous êtes joignable</label>
+                <input type="text" id="client-autre" placeholder="Ex: Facebook, Email...">
+            </div>
+            
+            <button class="btn-soumettre" onclick="validerEtEnvoyerCommande()">Envoyer</button>
+        </div>
+    </div>
+
+    <!-- PIED DE PAGE -->
+    <footer>
+        <div id="google_translate_element"></div>
+        <div class="footer-info">
+            <h3>R2B Entreprise</h3>
+            <p>📍 Notre base : Nagnenefou, non loin de la maternité</p>
+            <p class="copyright">&copy; 2026 R2B Entreprise. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- TRADUCTEUR -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'fr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//://google.com"></script>
+    <script src="Script.js"></script>
+
+    <!-- SCRIPT DE GLISSEMENT CORRECT POUR TOUT TYPE D'ÉCRAN -->
+    <script>
+        const el = document.getElementById("popup-commande");
+        const barre = document.getElementById("barre-tactile");
+
+        let estEnTrainDeGlisser = false;
+        let xInitial, yInitial;
+        let xActuel = 0, yActuel = 0;
+
+        // Tactile (Téléphones)
+        barre.addEventListener("touchstart", (e) => {
+            estEnTrainDeGlisser = true;
+            xInitial = e.touches[0].clientX - xActuel;
+            yInitial = e.touches[0].clientY - yActuel;
+        }, { passive: true });
+
+        document.addEventListener("touchmove", (e) => {
+            if (!estEnTrainDeGlisser) return;
+            xActuel = e.touches[0].clientX - xInitial;
+            yActuel = e.touches[0].clientY - yInitial;
+            el.style.transform = `translate3d(${xActuel}px, ${yActuel}px, 0)`;
+        }, { passive: false });
+
+        document.addEventListener("touchend", () => { estEnTrainDeGlisser = false; });
+
+        // Souris (Ordinateurs)
+        barre.addEventListener("mousedown", (e) => {
+            estEnTrainDeGlisser = true;
+            xInitial = e.clientX - xActuel;
+            yInitial = e.clientY - yActuel;
+        });
+
+        document.addEventListener("mousemove", (e) => {
+            if (!estEnTrainDeGlisser) return;
+            xActuel = e.clientX - xInitial;
+            yActuel = e.clientY - yInitial;
+            el.style.transform = `translate3d(${xActuel}px, ${yActuel}px, 0)`;
+        });
+
+        document.addEventListener("mouseup", () => { estEnTrainDeGlisser = false; });
+    </script>
+</body>
+</html>

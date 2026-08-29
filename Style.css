@@ -1,0 +1,161 @@
+/* Nettoyage global */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Calibri', 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #212529;
+    padding: 20px;
+}
+
+/* 1. Écran de démarrage Noir et Blanc Entouré */
+#splash-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.splash-box {
+    border: 3px solid #ffffff;
+    padding: 25px 45px;
+    text-align: center;
+    border-radius: 12px;
+}
+
+.splash-box h1 {
+    font-size: 4.5rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.splash-divider {
+    height: 2px;
+    background-color: #ffffff;
+    margin: 10px 0;
+}
+
+.splash-box p {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+/* 2. Panier Flottant en haut à droite */
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #000000;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* 3. En-tête Textes */
+header {
+    text-align: center;
+    padding: 30px 10px;
+    margin-bottom: 25px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.main-header-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.main-subtitle {
+    font-size: 1.1rem;
+    color: #495057;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 4. Grille Propre : 2 Terrains par ligne */
+.terrains-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .terrains-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Fiche Terrain au design épuré */
+.card-terrain {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+}
+
+.card-terrain h2 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.info-line {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+}
+
+.price-line {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #28a745;
+    margin: 15px 0;
+}
+
+.btn-order {
+    display: block;
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+/* 5. Pied de page Noir */
+footer {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 40px;
+    border-radius: 8px;
+}
+
+.footer-info p {
+    margin-top: 8px;
+    color: #ccc;
+}
