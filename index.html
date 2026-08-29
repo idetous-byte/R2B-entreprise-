@@ -26,17 +26,13 @@
         ===================================== */
 
         #splash-screen {
-
             position: fixed;
-
-            top: 0;
-            left: 0;
+            inset: 0;
 
             width: 100%;
             height: 100vh;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -47,12 +43,18 @@
             opacity: 1;
             visibility: visible;
 
-            transition: opacity 0.5s ease;
+            transition:
+                opacity 0.5s ease,
+                visibility 0.5s ease;
         }
 
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
 
         .splash-box {
-
             border: 2px solid #ffffff;
 
             padding: 30px 45px;
@@ -69,9 +71,7 @@
             min-width: 180px;
         }
 
-
         .splash-box h1 {
-
             margin: 0;
 
             color: #ffffff;
@@ -83,9 +83,7 @@
             letter-spacing: 5px;
         }
 
-
         .splash-divider {
-
             width: 80px;
             height: 2px;
 
@@ -94,9 +92,7 @@
             margin: 12px auto;
         }
 
-
         .splash-box p {
-
             margin: 0;
 
             color: #ffffff;
@@ -112,7 +108,6 @@
         ===================================== */
 
         .fenetre-flottante {
-
             display: none;
 
             position: fixed;
@@ -137,9 +132,7 @@
             touch-action: none;
         }
 
-
         .barre-deplacement {
-
             background: #000000;
 
             color: #ffffff;
@@ -159,9 +152,7 @@
             user-select: none;
         }
 
-
         .bouton-fermer {
-
             cursor: pointer;
 
             font-size: 1.5rem;
@@ -169,15 +160,11 @@
             padding: 0 5px;
         }
 
-
         .contenu-formulaire {
-
             padding: 15px;
         }
 
-
         .details-terrain-choisi {
-
             background: #f8f9fa;
 
             padding: 8px 12px;
@@ -191,15 +178,11 @@
             border-left: 4px solid #000;
         }
 
-
         .ligne-saisie {
-
             margin-bottom: 10px;
         }
 
-
         .ligne-saisie label {
-
             display: block;
 
             font-size: 0.9rem;
@@ -209,9 +192,7 @@
             margin-bottom: 3px;
         }
 
-
         .ligne-saisie input {
-
             width: 100%;
 
             padding: 8px;
@@ -223,9 +204,7 @@
             box-sizing: border-box;
         }
 
-
         .btn-soumettre {
-
             width: 100%;
 
             background: #000000;
@@ -245,9 +224,7 @@
             cursor: pointer;
         }
 
-
         .message-vide {
-
             text-align: center;
 
             background: white;
@@ -355,7 +332,6 @@
         id="popup-commande"
         class="fenetre-flottante">
 
-
         <div
             id="barre-tactile"
             class="barre-deplacement">
@@ -376,7 +352,6 @@
 
 
         <div class="contenu-formulaire">
-
 
             <div
                 id="cart-details"
@@ -462,7 +437,6 @@
 
             </button>
 
-
         </div>
 
     </div>
@@ -498,7 +472,7 @@
 
 
     <!-- =====================================
-         SCRIPT SANS FIREBASE
+         SCRIPT PRINCIPAL
     ===================================== -->
 
     <script>
@@ -509,33 +483,27 @@
 
 
         /* =====================================
-           DÉMARRAGE RAPIDE
+           DÉMARRAGE R2B
         ===================================== */
 
-        setTimeout(function() {
+        window.addEventListener("load", function () {
 
-            const splash =
-                document.getElementById(
-                    "splash-screen"
-                );
+            setTimeout(function () {
 
-            if (splash) {
+                const splash =
+                    document.getElementById(
+                        "splash-screen"
+                    );
 
-                splash.style.opacity = "0";
+                if (splash) {
 
-                setTimeout(function() {
+                    splash.classList.add("hidden");
 
-                    splash.style.visibility =
-                        "hidden";
+                }
 
-                    splash.style.pointerEvents =
-                        "none";
+            }, 2000);
 
-                }, 500);
-
-            }
-
-        }, 1000);
+        });
 
 
         /* =====================================
@@ -544,13 +512,20 @@
 
         function chargerTerrains() {
 
-            terrains =
-                JSON.parse(
-                    localStorage.getItem(
-                        "r2b_terrains"
-                    ) || "[]"
-                );
+            try {
 
+                terrains =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "r2b_terrains"
+                        ) || "[]"
+                    );
+
+            } catch (erreur) {
+
+                terrains = [];
+
+            }
 
             afficherTerrains();
 
@@ -815,9 +790,9 @@
             if (!nom || !telephone || !whatsapp) {
 
                 alert(
-                    "Veuillez remplir votre nom,
-                    votre numéro d'appel
-                    et votre WhatsApp."
+                    "Veuillez remplir votre nom, " +
+                    "votre numéro d'appel " +
+                    "et votre WhatsApp."
                 );
 
                 return;
@@ -825,12 +800,22 @@
             }
 
 
-            const commandes =
-                JSON.parse(
-                    localStorage.getItem(
-                        "r2b_commandes"
-                    ) || "[]"
-                );
+            let commandes = [];
+
+            try {
+
+                commandes =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "r2b_commandes"
+                        ) || "[]"
+                    );
+
+            } catch (erreur) {
+
+                commandes = [];
+
+            }
 
 
             commandes.push({
@@ -994,6 +979,7 @@
                     if (!estEnTrainDeGlisser)
                         return;
 
+
                     xActuel =
                         e.touches[0].clientX
                         - xInitial;
@@ -1054,6 +1040,7 @@
                     if (!estEnTrainDeGlisser)
                         return;
 
+
                     xActuel =
                         e.clientX - xInitial;
 
@@ -1089,17 +1076,6 @@
 
     </script>
 
-<script>
-window.addEventListener("load", function () {
-    setTimeout(function () {
-        const splash = document.getElementById("splash-screen");
-
-        if (splash) {
-            splash.classList.add("hidden");
-        }
-    }, 2000);
-});
-</script>
 </body>
 
-    </html>
+        </html>
