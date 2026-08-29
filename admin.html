@@ -11,317 +11,167 @@
 
     <title>R2B - Espace Chef</title>
 
-
     <style>
 
         body {
-
             font-family: Calibri, sans-serif;
-
             padding: 20px;
-
             background: #f4f6f9;
-
             max-width: 700px;
-
             margin: 0 auto;
-
             position: relative;
-
         }
-
 
         h1 {
-
             text-align: center;
-
             color: #000;
-
             margin-top: 60px;
-
         }
-
 
         .icon-hamburger {
-
             position: absolute;
-
             top: 20px;
-
             left: 20px;
-
             background: #000;
-
             color: white;
-
             border: none;
-
             width: 50px;
-
             height: 50px;
-
             font-size: 1.8rem;
-
             border-radius: 8px;
-
             cursor: pointer;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
         }
-
 
         .badge-rouge {
-
             position: absolute;
-
             top: -5px;
-
             right: -5px;
-
             background: red;
-
             color: white;
-
             border-radius: 50%;
-
             width: 22px;
-
             height: 22px;
-
             font-size: 0.8rem;
-
             font-weight: bold;
-
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
         }
-
 
         .box {
-
             background: white;
-
             padding: 20px;
-
             border-radius: 12px;
-
-            box-shadow:
-                0 4px 10px rgba(0,0,0,0.05);
-
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             margin-bottom: 20px;
-
             margin-top: 25px;
-
         }
-
 
         label {
-
             display: block;
-
             margin: 10px 0 5px;
-
             font-weight: bold;
-
         }
-
 
         input {
-
             width: 100%;
-
             padding: 12px;
-
             box-sizing: border-box;
-
             border: 1px solid #ccc;
-
             border-radius: 8px;
-
         }
-
 
         button.btn-block {
-
             width: 100%;
-
             padding: 14px;
-
             background: #000;
-
             color: white;
-
             border: none;
-
             border-radius: 8px;
-
             font-weight: bold;
-
             cursor: pointer;
-
             margin-top: 15px;
-
         }
-
 
         .page-gestion {
-
             display: none;
-
-            background: #ffffff;
-
+            background: #fff;
             padding: 25px;
-
             border-radius: 14px;
-
-            box-shadow:
-                0 10px 40px rgba(0,0,0,0.2);
-
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             margin-top: 20px;
-
             border: 1px solid #ddd;
-
         }
-
 
         .list-item {
-
             background: #f8f9fa;
-
             border: 1px solid #eee;
-
             padding: 15px;
-
             margin-bottom: 10px;
-
             border-radius: 8px;
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             gap: 10px;
-
         }
-
 
         .btn-del {
-
             background: #dc3545;
-
             color: white;
-
             padding: 8px 12px;
-
             border: none;
-
             border-radius: 6px;
-
             cursor: pointer;
-
         }
-
 
         .card-notif-client {
-
             background: #fff5f5;
-
             border-left: 6px solid #e53e3e;
-
             padding: 20px;
-
             border-radius: 8px;
-
             margin-bottom: 15px;
-
-            box-shadow:
-                0 2px 5px rgba(229,62,62,0.1);
-
         }
-
 
         .action-box {
-
             display: flex;
-
             gap: 10px;
-
             margin-top: 15px;
-
             flex-wrap: wrap;
-
         }
-
 
         .btn-action {
-
             flex: 1;
-
             padding: 10px;
-
             border: none;
-
             border-radius: 6px;
-
             font-weight: bold;
-
             text-align: center;
-
             text-decoration: none;
-
             color: white;
-
             cursor: pointer;
-
             min-width: 120px;
-
         }
-
 
         .btn-call {
-
             background: #007bff;
-
         }
-
 
         .btn-wa-action {
-
             background: #25D366;
-
         }
 
-
         .message-vide {
-
             padding: 15px;
-
             background: #f8f9fa;
-
             border-radius: 8px;
-
             text-align: center;
-
         }
 
     </style>
 
 </head>
 
-
 <body>
-
 
     <!-- MENU -->
 
@@ -348,12 +198,12 @@
     </h1>
 
 
-    <!-- FORMULAIRE -->
+    <!-- AJOUT TERRAIN -->
 
     <div class="box">
 
         <label>
-            Superficie (ex: 500 m²)
+            Superficie
         </label>
 
         <input
@@ -363,7 +213,7 @@
 
 
         <label>
-            Localisation (ex: Karakoro)
+            Localisation
         </label>
 
         <input
@@ -399,28 +249,18 @@
         id="page-gestion-container"
         class="page-gestion">
 
-
-        <h2
-            style="color:red; margin-bottom:15px;">
-
+        <h2 style="color:red;">
             🚨 Nouvelles Commandes Clients
-
         </h2>
-
 
         <div id="liste-commandes-reçues"></div>
 
 
-        <h2
-            style="margin-top:40px; margin-bottom:15px;">
-
+        <h2 style="margin-top:40px;">
             📦 Liste de vos Terrains en Vente
-
         </h2>
 
-
         <div id="liste-terrains-gestion"></div>
-
 
     </div>
 
@@ -434,9 +274,9 @@
 
     <script>
 
-        // =====================================
-        // FIREBASE
-        // =====================================
+        /* ===============================
+           FIREBASE
+        =============================== */
 
         const firebaseConfig = {
 
@@ -459,10 +299,7 @@
                 "614614560237",
 
             appId:
-                "1:614614560237:web:6ca754bde319f587590be4",
-
-            measurementId:
-                "G-01TZBXRKBX"
+                "1:614614560237:web:6ca754bde319f587590be4"
 
         };
 
@@ -473,34 +310,35 @@
             firebase.database();
 
 
-        // =====================================
-        // OUVRIR / FERMER GESTION
-        // =====================================
+        /* ===============================
+           MENU
+        =============================== */
 
         function ouvrirPageGestion() {
 
-            const p =
+            const page =
                 document.getElementById(
                     "page-gestion-container"
                 );
 
+            if (
+                page.style.display === "block"
+            ) {
 
-            p.style.display =
-                p.style.display === "block"
-                    ? "none"
-                    : "block";
+                page.style.display = "none";
 
+            } else {
 
-            chargerCommandes();
+                page.style.display = "block";
 
-            chargerTerrains();
+            }
 
         }
 
 
-        // =====================================
-        // AJOUTER TERRAIN
-        // =====================================
+        /* ===============================
+           AJOUTER TERRAIN
+        =============================== */
 
         function ajouterTerrain() {
 
@@ -509,12 +347,10 @@
                     "sup"
                 ).value.trim();
 
-
             const localisation =
                 document.getElementById(
                     "loc"
                 ).value.trim();
-
 
             const prix =
                 document.getElementById(
@@ -548,7 +384,12 @@
                         localisation,
 
                     prix:
-                        prix
+                        prix,
+
+                    date:
+                        new Date().toLocaleString(
+                            "fr-FR"
+                        )
 
                 })
 
@@ -558,16 +399,13 @@
                         "sup"
                     ).value = "";
 
-
                     document.getElementById(
                         "loc"
                     ).value = "";
 
-
                     document.getElementById(
                         "prix"
                     ).value = "";
-
 
                     alert(
                         "Terrain ajouté en ligne avec succès !"
@@ -589,121 +427,114 @@
         }
 
 
-        // =====================================
-        // CHARGER LES TERRAINS
-        // =====================================
+        /* ===============================
+           TERRAINS
+        =============================== */
 
         function chargerTerrains() {
 
             database
                 .ref("r2b_terrains")
-                .on(
+                .on("value", function(snapshot) {
 
-                    "value",
+                    const div =
+                        document.getElementById(
+                            "liste-terrains-gestion"
+                        );
 
-                    function(snapshot) {
+                    if (!div) return;
 
-                        const div =
-                            document.getElementById(
-                                "liste-terrains-gestion"
-                            );
-
-
-                        div.innerHTML = "";
+                    div.innerHTML = "";
 
 
-                        if (!snapshot.exists()) {
+                    if (!snapshot.exists()) {
 
-                            div.innerHTML = `
+                        div.innerHTML = `
 
-                                <div class="message-vide">
+                            <div class="message-vide">
 
-                                    Aucun terrain en vente.
+                                Aucun terrain en vente.
+
+                            </div>
+
+                        `;
+
+                        return;
+
+                    }
+
+
+                    let numero = 1;
+
+
+                    snapshot.forEach(
+                        function(child) {
+
+                            const t =
+                                child.val();
+
+
+                            div.innerHTML += `
+
+                                <div class="list-item">
+
+                                    <span>
+
+                                        <strong>
+                                            Terrain ${numero}
+                                        </strong>
+
+                                        <br>
+
+                                        📍
+                                        ${echapperHTML(
+                                            t.localisation
+                                        )}
+
+                                        <br>
+
+                                        📐
+                                        ${echapperHTML(
+                                            t.superficie
+                                        )}
+
+                                        <br>
+
+                                        💰
+                                        ${echapperHTML(
+                                            t.prix
+                                        )}
+                                        FCFA
+
+                                    </span>
+
+
+                                    <button
+                                        class="btn-del"
+                                        onclick="supprimerTerrain('${child.key}')">
+
+                                        Retirer
+
+                                    </button>
 
                                 </div>
 
                             `;
 
-                            return;
+
+                            numero++;
 
                         }
+                    );
 
-
-                        let numero = 1;
-
-
-                        snapshot.forEach(
-                            function(child) {
-
-                                const t =
-                                    child.val();
-
-
-                                div.innerHTML += `
-
-                                    <div class="list-item">
-
-                                        <span>
-
-                                            <strong>
-                                                Terrain ${numero}
-                                            </strong>
-
-                                            -
-
-                                            ${echapperHTML(
-                                                t.localisation
-                                            )}
-
-                                            (${echapperHTML(
-                                                t.superficie
-                                            )})
-
-                                            -
-
-                                            ${echapperHTML(
-                                                t.prix
-                                            )}
-
-                                            FCFA
-
-                                        </span>
-
-
-                                        <button
-
-                                            class="btn-del"
-
-                                            onclick="
-                                                supprimerTerrain(
-                                                    '${child.key}'
-                                                )
-                                            ">
-
-                                            Retirer du catalogue
-
-                                        </button>
-
-                                    </div>
-
-                                `;
-
-
-                                numero++;
-
-                            }
-                        );
-
-                    }
-
-                );
+                });
 
         }
 
 
-        // =====================================
-        // SUPPRIMER TERRAIN
-        // =====================================
+        /* ===============================
+           SUPPRIMER TERRAIN
+        =============================== */
 
         function supprimerTerrain(id) {
 
@@ -744,228 +575,202 @@
         }
 
 
-        // =====================================
-        // COMMANDES CLIENTS
-        // =====================================
+        /* ===============================
+           COMMANDES
+        =============================== */
 
         function chargerCommandes() {
 
             database
                 .ref("r2b_commandes")
-                .on(
-
-                    "value",
-
-                    function(snapshot) {
-
-                        const div =
-                            document.getElementById(
-                                "liste-commandes-reçues"
-                            );
-
-
-                        const badge =
-                            document.getElementById(
-                                "admin-badge"
-                            );
-
-
-                        div.innerHTML = "";
-
-
-                        if (!snapshot.exists()) {
-
-                            badge.style.display =
-                                "none";
-
-
-                            div.innerHTML = `
-
-                                <p>
-                                    Aucune notification de commande.
-                                </p>
-
-                            `;
-
-                            return;
-
-                        }
-
-
-                        let nombre = 0;
-
-
-                        snapshot.forEach(
-                            function(child) {
-
-                                const c =
-                                    child.val();
-
-
-                                nombre++;
-
-
-                                const texteWhatsApp =
-                                    encodeURIComponent(
-
-                                        `Bonjour ${c.nom}, R2B Entreprise a bien reçu votre commande pour le terrain situé à ${c.localisation}. Quand seriez-vous disponible pour une visite ?`
-
-                                    );
-
-
-                                div.innerHTML += `
-
-                                    <div
-                                        class="card-notif-client">
-
-                                        <h3>
-
-                                            🔴 Commande reçue
-
-                                        </h3>
-
-
-                                        <p>
-
-                                            <strong>
-                                                Client :
-                                            </strong>
-
-                                            ${echapperHTML(
-                                                c.nom
-                                            )}
-
-                                        </p>
-
-
-                                        <p>
-
-                                            <strong>
-                                                Terrain :
-                                            </strong>
-
-                                            ${echapperHTML(
-                                                c.localisation
-                                            )}
-
-                                        </p>
-
-
-                                        <p>
-
-                                            <strong>
-                                                Superficie :
-                                            </strong>
-
-                                            ${echapperHTML(
-                                                c.superficie || ""
-                                            )}
-
-                                        </p>
-
-
-                                        <p>
-
-                                            <strong>
-                                                Prix :
-                                            </strong>
-
-                                            ${echapperHTML(
-                                                c.prix
-                                            )}
-
-                                            FCFA
-
-                                        </p>
-
-
-                                        <p>
-
-                                            <strong>
-                                                Date :
-                                            </strong>
-
-                                            ${echapperHTML(
-                                                c.date || ""
-                                            )}
-
-                                        </p>
-
-
-                                        <div
-                                            class="action-box">
-
-
-                                            <a
-                                                href="tel:${echapperHTML(
-                                                    c.telephone
-                                                )}"
-
-                                                class="btn-action btn-call">
-
-                                                📞 Appeler
-
-                                            </a>
-
-
-                                            <a
-                                                href="https://wa.me/${echapperHTML(
-                                                    c.whatsapp
-                                                )}?text=${texteWhatsApp}"
-
-                                                target="_blank"
-
-                                                class="btn-action btn-wa-action">
-
-                                                💬 WhatsApp
-
-                                            </a>
-
-
-                                            <button
-
-                                                class="btn-del"
-
-                                                onclick="
-                                                    supprimerCommande(
-                                                        '${child.key}'
-                                                    )
-                                                ">
-
-                                                Archiver
-
-                                            </button>
-
-
-                                        </div>
-
-                                    </div>
-
-                                `;
-
-                            }
+                .on("value", function(snapshot) {
+
+                    const div =
+                        document.getElementById(
+                            "liste-commandes-reçues"
                         );
 
+                    const badge =
+                        document.getElementById(
+                            "admin-badge"
+                        );
 
-                        badge.innerText =
-                            nombre;
+                    if (!div || !badge) return;
+
+                    div.innerHTML = "";
 
 
-                        badge.style.display =
-                            nombre > 0
-                                ? "flex"
-                                : "none";
+                    if (!snapshot.exists()) {
+
+                        badge.style.display = "none";
+
+                        div.innerHTML = `
+
+                            <div class="message-vide">
+
+                                Aucune notification de commande.
+
+                            </div>
+
+                        `;
+
+                        return;
 
                     }
 
-                );
+
+                    let nombre = 0;
+
+
+                    snapshot.forEach(
+                        function(child) {
+
+                            const c =
+                                child.val();
+
+                            nombre++;
+
+
+                            const numeroWhatsApp =
+                                String(
+                                    c.whatsapp || ""
+                                ).replace(
+                                    /[^0-9]/g,
+                                    ""
+                                );
+
+
+                            const numeroTelephone =
+                                String(
+                                    c.telephone || ""
+                                ).replace(
+                                    /[^0-9+]/g,
+                                    ""
+                                );
+
+
+                            const texteWhatsApp =
+                                encodeURIComponent(
+
+                                    "Bonjour " +
+                                    (c.nom || "") +
+                                    ", R2B Entreprise a bien reçu votre commande pour le terrain situé à " +
+                                    (c.localisation || "") +
+                                    ". Quand seriez-vous disponible pour une visite ?"
+
+                                );
+
+
+                            div.innerHTML += `
+
+                                <div class="card-notif-client">
+
+                                    <h3>
+                                        🔴 Commande reçue
+                                    </h3>
+
+                                    <p>
+                                        <strong>Client :</strong>
+                                        ${echapperHTML(c.nom)}
+                                    </p>
+
+                                    <p>
+                                        <strong>Appel :</strong>
+                                        ${echapperHTML(c.telephone)}
+                                    </p>
+
+                                    <p>
+                                        <strong>WhatsApp :</strong>
+                                        ${echapperHTML(c.whatsapp)}
+                                    </p>
+
+                                    <p>
+                                        <strong>Fixe :</strong>
+                                        ${echapperHTML(c.fixe || "")}
+                                    </p>
+
+                                    <p>
+                                        <strong>Autre :</strong>
+                                        ${echapperHTML(c.autre || "")}
+                                    </p>
+
+                                    <p>
+                                        <strong>Terrain :</strong>
+                                        ${echapperHTML(c.localisation)}
+                                    </p>
+
+                                    <p>
+                                        <strong>Superficie :</strong>
+                                        ${echapperHTML(c.superficie || "")}
+                                    </p>
+
+                                    <p>
+                                        <strong>Prix :</strong>
+                                        ${echapperHTML(c.prix)}
+                                        FCFA
+                                    </p>
+
+                                    <p>
+                                        <strong>Date :</strong>
+                                        ${echapperHTML(c.date || "")}
+                                    </p>
+
+
+                                    <div class="action-box">
+
+                                        <a
+                                            href="tel:${numeroTelephone}"
+                                            class="btn-action btn-call">
+
+                                            📞 Appeler
+
+                                        </a>
+
+
+                                        <a
+                                            href="https://wa.me/${numeroWhatsApp}?text=${texteWhatsApp}"
+                                            target="_blank"
+                                            class="btn-action btn-wa-action">
+
+                                            💬 WhatsApp
+
+                                        </a>
+
+
+                                        <button
+                                            class="btn-del"
+                                            onclick="supprimerCommande('${child.key}')">
+
+                                            Archiver
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        }
+                    );
+
+
+                    badge.innerText =
+                        nombre;
+
+                    badge.style.display =
+                        nombre > 0
+                            ? "flex"
+                            : "none";
+
+                });
 
         }
 
 
-        // =====================================
-        // ARCHIVER COMMANDE
-        // =====================================
+        /* ===============================
+           ARCHIVER
+        =============================== */
 
         function supprimerCommande(id) {
 
@@ -984,21 +789,28 @@
                 .ref(
                     "r2b_commandes/" + id
                 )
-                .remove();
+                .remove()
+
+                .catch(function(error) {
+
+                    alert(
+                        "Erreur : " +
+                        error.message
+                    );
+
+                });
 
         }
 
 
-        // =====================================
-        // PROTECTION AFFICHAGE TEXTE
-        // =====================================
+        /* ===============================
+           PROTECTION
+        =============================== */
 
         function echapperHTML(texte) {
 
             const div =
-                document.createElement(
-                    "div"
-                );
+                document.createElement("div");
 
             div.textContent =
                 String(texte ?? "");
@@ -1008,17 +820,17 @@
         }
 
 
-        // =====================================
-        // CHARGEMENT AUTOMATIQUE
-        // =====================================
+        /* ===============================
+           CHARGEMENT
+        =============================== */
 
         window.addEventListener(
-            "load",
+            "DOMContentLoaded",
             function() {
 
-                chargerCommandes();
-
                 chargerTerrains();
+
+                chargerCommandes();
 
             }
         );
