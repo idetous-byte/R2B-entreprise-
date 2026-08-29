@@ -2,8 +2,12 @@
 <html lang="fr">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>R2B Entreprise - Terrains</title>
 
@@ -19,16 +23,20 @@
 
         /* =====================================
            ÉCRAN DE DÉMARRAGE R2B
-           ===================================== */
+        ===================================== */
 
         #splash-screen {
+
             position: fixed;
+
             top: 0;
             left: 0;
+
             width: 100%;
             height: 100vh;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -42,7 +50,9 @@
             transition: opacity 0.5s ease;
         }
 
+
         .splash-box {
+
             border: 2px solid #ffffff;
 
             padding: 30px 45px;
@@ -59,7 +69,9 @@
             min-width: 180px;
         }
 
+
         .splash-box h1 {
+
             margin: 0;
 
             color: #ffffff;
@@ -71,7 +83,9 @@
             letter-spacing: 5px;
         }
 
+
         .splash-divider {
+
             width: 80px;
             height: 2px;
 
@@ -80,7 +94,9 @@
             margin: 12px auto;
         }
 
+
         .splash-box p {
+
             margin: 0;
 
             color: #ffffff;
@@ -90,11 +106,13 @@
             letter-spacing: 2px;
         }
 
+
         /* =====================================
-           FENÊTRE FLOTTANTE
-           ===================================== */
+           FENÊTRE DE COMMANDE
+        ===================================== */
 
         .fenetre-flottante {
+
             display: none;
 
             position: fixed;
@@ -119,7 +137,9 @@
             touch-action: none;
         }
 
+
         .barre-deplacement {
+
             background: #000000;
 
             color: #ffffff;
@@ -139,7 +159,9 @@
             user-select: none;
         }
 
+
         .bouton-fermer {
+
             cursor: pointer;
 
             font-size: 1.5rem;
@@ -147,11 +169,15 @@
             padding: 0 5px;
         }
 
+
         .contenu-formulaire {
+
             padding: 15px;
         }
 
+
         .details-terrain-choisi {
+
             background: #f8f9fa;
 
             padding: 8px 12px;
@@ -165,11 +191,15 @@
             border-left: 4px solid #000;
         }
 
+
         .ligne-saisie {
+
             margin-bottom: 10px;
         }
 
+
         .ligne-saisie label {
+
             display: block;
 
             font-size: 0.9rem;
@@ -179,7 +209,9 @@
             margin-bottom: 3px;
         }
 
+
         .ligne-saisie input {
+
             width: 100%;
 
             padding: 8px;
@@ -191,7 +223,9 @@
             box-sizing: border-box;
         }
 
+
         .btn-soumettre {
+
             width: 100%;
 
             background: #000000;
@@ -211,7 +245,9 @@
             cursor: pointer;
         }
 
+
         .message-vide {
+
             text-align: center;
 
             background: white;
@@ -229,11 +265,13 @@
 
 </head>
 
+
 <body>
+
 
     <!-- =====================================
          ÉCRAN DE DÉMARRAGE
-         ===================================== -->
+    ===================================== -->
 
     <div id="splash-screen">
 
@@ -252,7 +290,7 @@
 
     <!-- =====================================
          PANIER
-         ===================================== -->
+    ===================================== -->
 
     <div
         id="client-cart"
@@ -261,14 +299,16 @@
 
         🛒
 
-        <span id="cart-count">0</span>
+        <span id="cart-count">
+            0
+        </span>
 
     </div>
 
 
     <!-- =====================================
          EN-TÊTE
-         ===================================== -->
+    ===================================== -->
 
     <header>
 
@@ -288,7 +328,7 @@
 
     <!-- =====================================
          TERRAINS
-         ===================================== -->
+    ===================================== -->
 
     <main>
 
@@ -297,7 +337,9 @@
             class="terrains-grid">
 
             <div class="message-vide">
+
                 Chargement des terrains...
+
             </div>
 
         </div>
@@ -307,11 +349,12 @@
 
     <!-- =====================================
          FENÊTRE DE COMMANDE
-         ===================================== -->
+    ===================================== -->
 
     <div
         id="popup-commande"
         class="fenetre-flottante">
+
 
         <div
             id="barre-tactile"
@@ -334,10 +377,10 @@
 
         <div class="contenu-formulaire">
 
+
             <div
                 id="cart-details"
                 class="details-terrain-choisi">
-
             </div>
 
 
@@ -378,4 +421,674 @@
                 <input
                     type="tel"
                     id="client-whatsapp"
-                    placeholder="Ex: 050505
+                    placeholder="Ex: 0505050505">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Numéro Fixe
+                </label>
+
+                <input
+                    type="tel"
+                    id="client-fixe"
+                    placeholder="Ex: 2727272727">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Autre moyen où vous êtes joignable
+                </label>
+
+                <input
+                    type="text"
+                    id="client-autre"
+                    placeholder="Ex: Facebook, Email...">
+
+            </div>
+
+
+            <button
+                class="btn-soumettre"
+                onclick="validerEtEnvoyerCommande()">
+
+                Envoyer
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         PIED DE PAGE
+    ===================================== -->
+
+    <footer>
+
+        <div class="footer-info">
+
+            <h3>
+                R2B Entreprise
+            </h3>
+
+            <p>
+                📍 Notre base : Nagnenefou,
+                non loin de la maternité
+            </p>
+
+            <p class="copyright">
+
+                &copy; 2026 R2B Entreprise.
+                Tous droits réservés.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================
+         SCRIPT SANS FIREBASE
+    ===================================== -->
+
+    <script>
+
+        let terrains = [];
+
+        let terrainSelectionne = null;
+
+
+        /* =====================================
+           DÉMARRAGE RAPIDE
+        ===================================== */
+
+        setTimeout(function() {
+
+            const splash =
+                document.getElementById(
+                    "splash-screen"
+                );
+
+            if (splash) {
+
+                splash.style.opacity = "0";
+
+                setTimeout(function() {
+
+                    splash.style.visibility =
+                        "hidden";
+
+                    splash.style.pointerEvents =
+                        "none";
+
+                }, 500);
+
+            }
+
+        }, 1000);
+
+
+        /* =====================================
+           CHARGER LES TERRAINS
+        ===================================== */
+
+        function chargerTerrains() {
+
+            terrains =
+                JSON.parse(
+                    localStorage.getItem(
+                        "r2b_terrains"
+                    ) || "[]"
+                );
+
+
+            afficherTerrains();
+
+        }
+
+
+        /* =====================================
+           AFFICHER LES TERRAINS
+        ===================================== */
+
+        function afficherTerrains() {
+
+            const container =
+                document.getElementById(
+                    "terrains-container"
+                );
+
+
+            if (!container) return;
+
+
+            container.innerHTML = "";
+
+
+            if (terrains.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="message-vide">
+
+                        Aucun terrain disponible
+                        pour le moment.
+
+                        <br><br>
+
+                        Terrain indisponible.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            terrains.forEach(function(t, index) {
+
+                container.innerHTML += `
+
+                    <div class="card-terrain">
+
+                        <h2>
+                            🏡 Terrain ${index + 1}
+                        </h2>
+
+                        <p class="info-line">
+
+                            📐 <strong>
+                                Superficie :
+                            </strong>
+
+                            ${echapperHTML(
+                                t.superficie
+                            )}
+
+                        </p>
+
+                        <p class="info-line">
+
+                            📍 <strong>
+                                Localisation :
+                            </strong>
+
+                            ${echapperHTML(
+                                t.localisation
+                            )}
+
+                        </p>
+
+                        <p class="price-line">
+
+                            💰
+                            ${echapperHTML(t.prix)}
+                            FCFA
+
+                        </p>
+
+
+                        <button
+                            class="btn-order"
+                            onclick="
+                                selectionnerTerrain(${index})
+                            ">
+
+                            Commander ce terrain
+
+                        </button>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+
+        /* =====================================
+           SÉLECTIONNER TERRAIN
+        ===================================== */
+
+        function selectionnerTerrain(index) {
+
+            if (!terrains[index]) return;
+
+
+            terrainSelectionne =
+                terrains[index];
+
+
+            const details =
+                document.getElementById(
+                    "cart-details"
+                );
+
+
+            details.innerHTML = `
+
+                <strong>
+                    Terrain sélectionné
+                </strong>
+
+                <br>
+
+                Localisation :
+                ${echapperHTML(
+                    terrainSelectionne.localisation
+                )}
+
+                <br>
+
+                Superficie :
+                ${echapperHTML(
+                    terrainSelectionne.superficie
+                )}
+
+                <br>
+
+                Prix :
+                ${echapperHTML(
+                    terrainSelectionne.prix
+                )}
+                FCFA
+
+            `;
+
+
+            const popup =
+                document.getElementById(
+                    "popup-commande"
+                );
+
+
+            popup.style.display = "block";
+
+        }
+
+
+        /* =====================================
+           OUVRIR PANIER
+        ===================================== */
+
+        function ouvrirPanier() {
+
+            if (!terrainSelectionne) {
+
+                alert(
+                    "Veuillez d'abord sélectionner un terrain."
+                );
+
+                return;
+
+            }
+
+
+            const popup =
+                document.getElementById(
+                    "popup-commande"
+                );
+
+
+            popup.style.display = "block";
+
+        }
+
+
+        /* =====================================
+           FERMER PANIER
+        ===================================== */
+
+        function fermerPanier() {
+
+            const popup =
+                document.getElementById(
+                    "popup-commande"
+                );
+
+
+            popup.style.display = "none";
+
+        }
+
+
+        /* =====================================
+           ENVOYER COMMANDE
+        ===================================== */
+
+        function validerEtEnvoyerCommande() {
+
+            if (!terrainSelectionne) {
+
+                alert(
+                    "Veuillez sélectionner un terrain."
+                );
+
+                return;
+
+            }
+
+
+            const nom =
+                document.getElementById(
+                    "client-name"
+                ).value.trim();
+
+
+            const telephone =
+                document.getElementById(
+                    "client-phone"
+                ).value.trim();
+
+
+            const whatsapp =
+                document.getElementById(
+                    "client-whatsapp"
+                ).value.trim();
+
+
+            const fixe =
+                document.getElementById(
+                    "client-fixe"
+                ).value.trim();
+
+
+            const autre =
+                document.getElementById(
+                    "client-autre"
+                ).value.trim();
+
+
+            if (!nom || !telephone || !whatsapp) {
+
+                alert(
+                    "Veuillez remplir votre nom,
+                    votre numéro d'appel
+                    et votre WhatsApp."
+                );
+
+                return;
+
+            }
+
+
+            const commandes =
+                JSON.parse(
+                    localStorage.getItem(
+                        "r2b_commandes"
+                    ) || "[]"
+                );
+
+
+            commandes.push({
+
+                nom: nom,
+
+                telephone: telephone,
+
+                whatsapp: whatsapp,
+
+                fixe: fixe,
+
+                autre: autre,
+
+                terrain:
+                    terrainSelectionne.localisation,
+
+                localisation:
+                    terrainSelectionne.localisation,
+
+                superficie:
+                    terrainSelectionne.superficie,
+
+                prix:
+                    terrainSelectionne.prix,
+
+                date:
+                    new Date().toLocaleString(
+                        "fr-FR"
+                    )
+
+            });
+
+
+            localStorage.setItem(
+
+                "r2b_commandes",
+
+                JSON.stringify(commandes)
+
+            );
+
+
+            alert(
+                "Votre commande a été envoyée avec succès !"
+            );
+
+
+            document.getElementById(
+                "client-name"
+            ).value = "";
+
+
+            document.getElementById(
+                "client-phone"
+            ).value = "";
+
+
+            document.getElementById(
+                "client-whatsapp"
+            ).value = "";
+
+
+            document.getElementById(
+                "client-fixe"
+            ).value = "";
+
+
+            document.getElementById(
+                "client-autre"
+            ).value = "";
+
+
+            fermerPanier();
+
+        }
+
+
+        /* =====================================
+           PROTECTION DU TEXTE
+        ===================================== */
+
+        function echapperHTML(texte) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent =
+                String(texte ?? "");
+
+            return div.innerHTML;
+
+        }
+
+
+        /* =====================================
+           CHARGEMENT
+        ===================================== */
+
+        window.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                chargerTerrains();
+
+            }
+        );
+
+
+        /* =====================================
+           DÉPLACEMENT DE LA FENÊTRE
+        ===================================== */
+
+        const el =
+            document.getElementById(
+                "popup-commande"
+            );
+
+        const barre =
+            document.getElementById(
+                "barre-tactile"
+            );
+
+
+        let estEnTrainDeGlisser = false;
+
+        let xInitial = 0;
+        let yInitial = 0;
+
+        let xActuel = 0;
+        let yActuel = 0;
+
+
+        if (barre) {
+
+            barre.addEventListener(
+                "touchstart",
+                function(e) {
+
+                    estEnTrainDeGlisser = true;
+
+                    xInitial =
+                        e.touches[0].clientX
+                        - xActuel;
+
+                    yInitial =
+                        e.touches[0].clientY
+                        - yActuel;
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+            document.addEventListener(
+                "touchmove",
+                function(e) {
+
+                    if (!estEnTrainDeGlisser)
+                        return;
+
+                    xActuel =
+                        e.touches[0].clientX
+                        - xInitial;
+
+                    yActuel =
+                        e.touches[0].clientY
+                        - yInitial;
+
+
+                    if (el) {
+
+                        el.style.transform =
+                            `translate3d(
+                                ${xActuel}px,
+                                ${yActuel}px,
+                                0
+                            )`;
+
+                    }
+
+                },
+                {
+                    passive: false
+                }
+            );
+
+
+            document.addEventListener(
+                "touchend",
+                function() {
+
+                    estEnTrainDeGlisser = false;
+
+                }
+            );
+
+
+            barre.addEventListener(
+                "mousedown",
+                function(e) {
+
+                    estEnTrainDeGlisser = true;
+
+                    xInitial =
+                        e.clientX - xActuel;
+
+                    yInitial =
+                        e.clientY - yActuel;
+
+                }
+            );
+
+
+            document.addEventListener(
+                "mousemove",
+                function(e) {
+
+                    if (!estEnTrainDeGlisser)
+                        return;
+
+                    xActuel =
+                        e.clientX - xInitial;
+
+                    yActuel =
+                        e.clientY - yInitial;
+
+
+                    if (el) {
+
+                        el.style.transform =
+                            `translate3d(
+                                ${xActuel}px,
+                                ${yActuel}px,
+                                0
+                            )`;
+
+                    }
+
+                }
+            );
+
+
+            document.addEventListener(
+                "mouseup",
+                function() {
+
+                    estEnTrainDeGlisser = false;
+
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+
+    </html>
