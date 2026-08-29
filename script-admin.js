@@ -1,40 +1,53 @@
+// Connexion à VOTRE Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyA94jSfi5m_aSDUDOSE5s66mwoFF6Bj8FU",
+  authDomain: "://firebaseapp.com",
+  databaseURL: "https://firebaseio.com",
+  projectId: "r2b-entreprise",
+  storageBucket: "://appspot.com",
+  messagingSenderId: "614614560237",
+  appId: "1:614614560237:web:6ca754bde319f587590be4"
+};
+
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+// Quand la page charge
 window.addEventListener('DOMContentLoaded', () => {
-    chargerCommandesChef();
+    // Écouter les changements en temps réel
+    database.ref('r2b_terrains').on('value', (snapshot) => {
+        const liste = [];
+        snapshot.forEach((childSnapshot) => {
+            liste.push({ id: childSnapshot.key, ...childSnapshot.val() });
+        });
+        afficherTerrainsChef(liste);
+    });
 });
 
-function chargerCommandesChef() {
-    const container = document.getElementById('commandes-container'); // Vérifiez que cet ID existe dans admin.html
-    if (!container) return;
-
-    // Récupérer les commandes enregistrées par le client
-    const commandes = JSON.parse(localStorage.getItem('r2b_commandes') || '[]');
-
-    if (commandes.length === 0) {
-        container.innerHTML = "<p style='text-align:center;'>Aucune commande reçue pour le moment.</p>";
-        return;
-    }
-
-    container.innerHTML = "";
-    
-    // Afficher chaque commande sous forme de carte ou de ligne
-    commandes.forEach((c, i) => {
-        container.innerHTML += `
-            <div class="card-commande" style="border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; background: white; border-radius: 8px;">
-                <h3>Commande #${i + 1} - ${c.date}</h3>
-                <p><strong>Client :</strong> ${c.nom}</p>
-                <p><strong>Téléphone :</strong> ${c.telephone} / <strong>WhatsApp :</strong> ${c.whatsapp}</p>
-                <p><strong>Terrain :</strong> Terrain ${c.terrain} à ${c.localisation}</p>
-                <p><strong>Prix :</strong> ${c.prix} FCFA</p>
-                <button onclick="supprimerCommande(${i})" style="background: red; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Supprimer</button>
-            </div>
-        `;
+// Fonction pour envoyer un terrain en ligne
+function ajouterTerrainDepuisFormulaire(superficie, localisation, prix) {
+    database.ref('r2b_terrains').push({
+        superficie: superficie,
+        localisation: localisation,
+        prix: prix
+    }).then(() => {
+        alert("Terrain ajouté en ligne avec succès !");
     });
 }
 
-// Fonction pour permettre au chef de nettoyer sa liste
-function supprimerCommande(index) {
-    const commandes = JSON.parse(localStorage.getItem('r2b_commandes') || '[]');
-    commandes.splice(index, 1); // Retire la commande de la liste
-    localStorage.setItem('r2b_commandes', JSON.stringify(commandes));
-    chargerCommandesChef(); // Recommence l'affichage
+function afficherTerrainsChef(liste) {
+    const container = document.getElementById('commandes-container'); // Changez l'ID si nécessaire
+    if (!container) return;
+    container.innerHTML = "";
+    liste.forEach((t, i) => {
+        container.innerHTML += `
+            <div style="border:1px solid #ccc; padding:10px; margin:5px; border-radius:5px; background:white;">
+                <p><strong>Terrain ${i+1} :</strong> ${t.localisation} - ${t.prix} FCFA</p>
+                <button onclick="supprimerTerrain('${t.id}')" style="background:red; color:white; border:none; padding:5px; cursor:pointer;">Supprimer</button>
+            </div>`;
+    });
+}
+
+function supprimerTerrain(id) {
+    database.ref(`r2b_terrains/${id}`).remove();
 }
