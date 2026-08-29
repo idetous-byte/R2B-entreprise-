@@ -25,7 +25,9 @@ const firebaseConfig = {
 };
 
 
-// Initialiser Firebase
+// ============================================
+// INITIALISER FIREBASE
+// ============================================
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
@@ -49,24 +51,28 @@ let terrainSelectionne = null;
 
 window.addEventListener("load", function() {
 
-    setTimeout(function() {
+    const splash =
+        document.getElementById("splash-screen");
 
-        const splash =
-            document.getElementById("splash-screen");
+    const mainContent =
+        document.getElementById("main-content");
+
+    // Démarrage pendant 1 seconde
+    setTimeout(function() {
 
         if (splash) {
 
-            splash.style.opacity = "0";
-
-            setTimeout(function() {
-
-                splash.style.visibility = "hidden";
-
-            }, 500);
+            splash.classList.add("hidden");
 
         }
 
-    }, 1800);
+        if (mainContent) {
+
+            mainContent.classList.add("visible");
+
+        }
+
+    }, 1000);
 
 });
 
@@ -121,21 +127,28 @@ window.addEventListener("DOMContentLoaded", function() {
                     error
                 );
 
-                document.getElementById(
-                    "terrains-container"
-                ).innerHTML = `
+                const container =
+                    document.getElementById(
+                        "terrains-container"
+                    );
 
-                    <div class="message-vide">
+                if (container) {
 
-                        Impossible de charger les terrains.
+                    container.innerHTML = `
 
-                        <br><br>
+                        <div class="message-vide">
 
-                        Vérifiez la connexion Firebase.
+                            Impossible de charger les terrains.
 
-                    </div>
+                            <br><br>
 
-                `;
+                            Vérifiez la connexion Firebase.
+
+                        </div>
+
+                    `;
+
+                }
 
             }
 
@@ -440,9 +453,9 @@ function validerEtEnvoyerCommande() {
     };
 
 
-    // IMPORTANT :
-    // Les commandes sont maintenant également
-    // enregistrées dans Firebase.
+    // ========================================
+    // ENREGISTRER LA COMMANDE DANS FIREBASE
+    // ========================================
 
     database
         .ref("r2b_commandes")
@@ -507,4 +520,4 @@ function echapperHTML(texte) {
 
     return div.innerHTML;
 
-        }
+                              }
