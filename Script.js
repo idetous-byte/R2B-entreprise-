@@ -23,14 +23,16 @@ function chargerTerrainsClient() {
     }
     container.innerHTML = "";
     liste.forEach((t, i) => {
-        container.innerHTML += `
-            <div class="card-terrain">
-                <h2>Terrain ${i + 1}</h2>
-                <div class="info-line">📐 <strong>Superficie :</strong> ${t.superficie}</div>
-                <div class="info-line">📍 <strong>Localisation :</strong> ${t.localisation}</div>
-                <div class="price-line">💰 ${t.prix} FCFA</div>
-                <button onclick="ajouterAuPanier(${i}, '${t.localisation}', '${t.prix}')" class="btn-order" style="border:none; cursor:pointer;">Commander</button>
-            </div>`;
+     container.innerHTML += `
+    <div class="card-terrain">
+        <h2>Terrain ${i + 1}</h2>
+        <div class="info-line"><strong>Superficie :</strong> ${t.superficie}</div>
+        <div class="info-line"><strong>Localisation :</strong> ${t.localisation}</div>
+        <div class="price-line">${t.prix} FCFA</div>
+        <button onclick="ajouterAuPanier(${i}, '${t.localisation}', '${t.prix}')" class="btn-order">Commander</button>
+    </div>
+`;
+   
     });
 }
 
