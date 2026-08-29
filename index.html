@@ -2,50 +2,36 @@
 <html lang="fr">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R2B Entreprise - Terrains</title>
 
     <link rel="stylesheet" href="Style.css">
 
     <style>
-
         body,
         button,
         input {
             font-family: 'Calibri', 'Segoe UI', sans-serif;
         }
 
-        /* =====================================
+        /* ===============================
            ÉCRAN DE DÉMARRAGE R2B
-        ===================================== */
+        =============================== */
 
         #splash-screen {
             position: fixed;
             inset: 0;
-
             width: 100%;
             height: 100vh;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
-            background: #000000;
-
+            background: #000;
             z-index: 99999;
-
             opacity: 1;
             visibility: visible;
-
-            transition:
-                opacity 0.5s ease,
-                visibility 0.5s ease;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
 
         #splash-screen.hidden {
@@ -55,108 +41,71 @@
         }
 
         .splash-box {
-            border: 2px solid #ffffff;
-
+            border: 2px solid #fff;
             padding: 30px 45px;
-
             text-align: center;
-
-            background: #000000;
-
+            background: #000;
             border-radius: 12px;
-
-            box-shadow:
-                0 0 25px rgba(255,255,255,0.25);
-
+            box-shadow: 0 0 25px rgba(255,255,255,0.25);
             min-width: 180px;
         }
 
         .splash-box h1 {
             margin: 0;
-
-            color: #ffffff;
-
+            color: #fff;
             font-size: 55px;
-
             font-weight: bold;
-
             letter-spacing: 5px;
         }
 
         .splash-divider {
             width: 80px;
             height: 2px;
-
-            background: #ffffff;
-
+            background: #fff;
             margin: 12px auto;
         }
 
         .splash-box p {
             margin: 0;
-
-            color: #ffffff;
-
+            color: #fff;
             font-size: 22px;
-
             letter-spacing: 2px;
         }
 
-
-        /* =====================================
-           FENÊTRE DE COMMANDE
-        ===================================== */
+        /* ===============================
+           FENÊTRE COMMANDE
+        =============================== */
 
         .fenetre-flottante {
             display: none;
-
             position: fixed;
-
             top: 15%;
             left: 5%;
-
             width: 90%;
             max-width: 360px;
-
-            background: #ffffff;
-
-            border: 2px solid #000000;
-
+            background: #fff;
+            border: 2px solid #000;
             border-radius: 12px;
-
-            box-shadow:
-                0 10px 30px rgba(0,0,0,0.4);
-
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
             z-index: 10005;
-
             touch-action: none;
         }
 
         .barre-deplacement {
-            background: #000000;
-
-            color: #ffffff;
-
+            background: #000;
+            color: #fff;
             padding: 12px;
-
             cursor: move;
-
             font-weight: bold;
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             user-select: none;
         }
 
         .bouton-fermer {
             cursor: pointer;
-
             font-size: 1.5rem;
-
             padding: 0 5px;
         }
 
@@ -166,15 +115,10 @@
 
         .details-terrain-choisi {
             background: #f8f9fa;
-
             padding: 8px 12px;
-
             border-radius: 6px;
-
             margin-bottom: 12px;
-
             font-size: 0.95rem;
-
             border-left: 4px solid #000;
         }
 
@@ -184,71 +128,45 @@
 
         .ligne-saisie label {
             display: block;
-
             font-size: 0.9rem;
-
             font-weight: bold;
-
             margin-bottom: 3px;
         }
 
         .ligne-saisie input {
             width: 100%;
-
             padding: 8px;
-
             border: 1px solid #ccc;
-
             border-radius: 6px;
-
             box-sizing: border-box;
         }
 
         .btn-soumettre {
             width: 100%;
-
-            background: #000000;
-
-            color: #ffffff;
-
+            background: #000;
+            color: #fff;
             border: none;
-
             padding: 12px;
-
             border-radius: 6px;
-
             font-weight: bold;
-
             text-transform: uppercase;
-
             cursor: pointer;
         }
 
         .message-vide {
             text-align: center;
-
             background: white;
-
             padding: 25px;
-
             border-radius: 10px;
-
             margin: 20px 0;
-
             color: #555;
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
-    <!-- =====================================
-         ÉCRAN DE DÉMARRAGE
-    ===================================== -->
+    <!-- ÉCRAN DE DÉMARRAGE -->
 
     <div id="splash-screen">
 
@@ -265,9 +183,7 @@
     </div>
 
 
-    <!-- =====================================
-         PANIER
-    ===================================== -->
+    <!-- PANIER -->
 
     <div
         id="client-cart"
@@ -276,16 +192,12 @@
 
         🛒
 
-        <span id="cart-count">
-            0
-        </span>
+        <span id="cart-count">0</span>
 
     </div>
 
 
-    <!-- =====================================
-         EN-TÊTE
-    ===================================== -->
+    <!-- EN-TÊTE -->
 
     <header>
 
@@ -294,18 +206,14 @@
         </div>
 
         <p class="main-subtitle">
-
             Construisez l'avenir dans le présent
             en achetant des terrains à très bon prix.
-
         </p>
 
     </header>
 
 
-    <!-- =====================================
-         TERRAINS
-    ===================================== -->
+    <!-- TERRAINS -->
 
     <main>
 
@@ -314,9 +222,7 @@
             class="terrains-grid">
 
             <div class="message-vide">
-
                 Chargement des terrains...
-
             </div>
 
         </div>
@@ -324,9 +230,7 @@
     </main>
 
 
-    <!-- =====================================
-         FENÊTRE DE COMMANDE
-    ===================================== -->
+    <!-- COMMANDE -->
 
     <div
         id="popup-commande"
@@ -336,746 +240,8 @@
             id="barre-tactile"
             class="barre-deplacement">
 
-            <span>
-                🖐️ Glissez ici pour déplacer
-            </span>
+            <span>🖐️ Glissez ici pour déplacer</span>
 
             <span
                 class="bouton-fermer"
-                onclick="fermerPanier()">
-
-                &times;
-
-            </span>
-
-        </div>
-
-
-        <div class="contenu-formulaire">
-
-            <div
-                id="cart-details"
-                class="details-terrain-choisi">
-            </div>
-
-
-            <div class="ligne-saisie">
-
-                <label>
-                    Nom et Prénom
-                </label>
-
-                <input
-                    type="text"
-                    id="client-name"
-                    placeholder="Votre nom">
-
-            </div>
-
-
-            <div class="ligne-saisie">
-
-                <label>
-                    Numéro Appel Direct
-                </label>
-
-                <input
-                    type="tel"
-                    id="client-phone"
-                    placeholder="Ex: 0707070707">
-
-            </div>
-
-
-            <div class="ligne-saisie">
-
-                <label>
-                    Numéro WhatsApp
-                </label>
-
-                <input
-                    type="tel"
-                    id="client-whatsapp"
-                    placeholder="Ex: 0505050505">
-
-            </div>
-
-
-            <div class="ligne-saisie">
-
-                <label>
-                    Numéro Fixe
-                </label>
-
-                <input
-                    type="tel"
-                    id="client-fixe"
-                    placeholder="Ex: 2727272727">
-
-            </div>
-
-
-            <div class="ligne-saisie">
-
-                <label>
-                    Autre moyen où vous êtes joignable
-                </label>
-
-                <input
-                    type="text"
-                    id="client-autre"
-                    placeholder="Ex: Facebook, Email...">
-
-            </div>
-
-
-            <button
-                class="btn-soumettre"
-                onclick="validerEtEnvoyerCommande()">
-
-                Envoyer
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================
-         PIED DE PAGE
-    ===================================== -->
-
-    <footer>
-
-        <div class="footer-info">
-
-            <h3>
-                R2B Entreprise
-            </h3>
-
-            <p>
-                📍 Notre base : Nagnenefou,
-                non loin de la maternité
-            </p>
-
-            <p class="copyright">
-
-                &copy; 2026 R2B Entreprise.
-                Tous droits réservés.
-
-            </p>
-
-        </div>
-
-    </footer>
-
-
-    <!-- =====================================
-         SCRIPT PRINCIPAL
-    ===================================== -->
-
-    <script>
-
-        let terrains = [];
-
-        let terrainSelectionne = null;
-
-
-        /* =====================================
-           DÉMARRAGE R2B
-        ===================================== */
-
-        window.addEventListener("load", function () {
-
-            setTimeout(function () {
-
-                const splash =
-                    document.getElementById(
-                        "splash-screen"
-                    );
-
-                if (splash) {
-
-                    splash.classList.add("hidden");
-
-                }
-
-            }, 2000);
-
-        });
-
-
-        /* =====================================
-           CHARGER LES TERRAINS
-        ===================================== */
-
-        function chargerTerrains() {
-
-            try {
-
-                terrains =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "r2b_terrains"
-                        ) || "[]"
-                    );
-
-            } catch (erreur) {
-
-                terrains = [];
-
-            }
-
-            afficherTerrains();
-
-        }
-
-
-        /* =====================================
-           AFFICHER LES TERRAINS
-        ===================================== */
-
-        function afficherTerrains() {
-
-            const container =
-                document.getElementById(
-                    "terrains-container"
-                );
-
-
-            if (!container) return;
-
-
-            container.innerHTML = "";
-
-
-            if (terrains.length === 0) {
-
-                container.innerHTML = `
-
-                    <div class="message-vide">
-
-                        Aucun terrain disponible
-                        pour le moment.
-
-                        <br><br>
-
-                        Terrain indisponible.
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
-
-
-            terrains.forEach(function(t, index) {
-
-                container.innerHTML += `
-
-                    <div class="card-terrain">
-
-                        <h2>
-                            🏡 Terrain ${index + 1}
-                        </h2>
-
-                        <p class="info-line">
-
-                            📐 <strong>
-                                Superficie :
-                            </strong>
-
-                            ${echapperHTML(
-                                t.superficie
-                            )}
-
-                        </p>
-
-                        <p class="info-line">
-
-                            📍 <strong>
-                                Localisation :
-                            </strong>
-
-                            ${echapperHTML(
-                                t.localisation
-                            )}
-
-                        </p>
-
-                        <p class="price-line">
-
-                            💰
-                            ${echapperHTML(t.prix)}
-                            FCFA
-
-                        </p>
-
-
-                        <button
-                            class="btn-order"
-                            onclick="
-                                selectionnerTerrain(${index})
-                            ">
-
-                            Commander ce terrain
-
-                        </button>
-
-                    </div>
-
-                `;
-
-            });
-
-        }
-
-
-        /* =====================================
-           SÉLECTIONNER TERRAIN
-        ===================================== */
-
-        function selectionnerTerrain(index) {
-
-            if (!terrains[index]) return;
-
-
-            terrainSelectionne =
-                terrains[index];
-
-
-            const details =
-                document.getElementById(
-                    "cart-details"
-                );
-
-
-            details.innerHTML = `
-
-                <strong>
-                    Terrain sélectionné
-                </strong>
-
-                <br>
-
-                Localisation :
-                ${echapperHTML(
-                    terrainSelectionne.localisation
-                )}
-
-                <br>
-
-                Superficie :
-                ${echapperHTML(
-                    terrainSelectionne.superficie
-                )}
-
-                <br>
-
-                Prix :
-                ${echapperHTML(
-                    terrainSelectionne.prix
-                )}
-                FCFA
-
-            `;
-
-
-            const popup =
-                document.getElementById(
-                    "popup-commande"
-                );
-
-
-            popup.style.display = "block";
-
-        }
-
-
-        /* =====================================
-           OUVRIR PANIER
-        ===================================== */
-
-        function ouvrirPanier() {
-
-            if (!terrainSelectionne) {
-
-                alert(
-                    "Veuillez d'abord sélectionner un terrain."
-                );
-
-                return;
-
-            }
-
-
-            const popup =
-                document.getElementById(
-                    "popup-commande"
-                );
-
-
-            popup.style.display = "block";
-
-        }
-
-
-        /* =====================================
-           FERMER PANIER
-        ===================================== */
-
-        function fermerPanier() {
-
-            const popup =
-                document.getElementById(
-                    "popup-commande"
-                );
-
-
-            popup.style.display = "none";
-
-        }
-
-
-        /* =====================================
-           ENVOYER COMMANDE
-        ===================================== */
-
-        function validerEtEnvoyerCommande() {
-
-            if (!terrainSelectionne) {
-
-                alert(
-                    "Veuillez sélectionner un terrain."
-                );
-
-                return;
-
-            }
-
-
-            const nom =
-                document.getElementById(
-                    "client-name"
-                ).value.trim();
-
-
-            const telephone =
-                document.getElementById(
-                    "client-phone"
-                ).value.trim();
-
-
-            const whatsapp =
-                document.getElementById(
-                    "client-whatsapp"
-                ).value.trim();
-
-
-            const fixe =
-                document.getElementById(
-                    "client-fixe"
-                ).value.trim();
-
-
-            const autre =
-                document.getElementById(
-                    "client-autre"
-                ).value.trim();
-
-
-            if (!nom || !telephone || !whatsapp) {
-
-                alert(
-                    "Veuillez remplir votre nom, " +
-                    "votre numéro d'appel " +
-                    "et votre WhatsApp."
-                );
-
-                return;
-
-            }
-
-
-            let commandes = [];
-
-            try {
-
-                commandes =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "r2b_commandes"
-                        ) || "[]"
-                    );
-
-            } catch (erreur) {
-
-                commandes = [];
-
-            }
-
-
-            commandes.push({
-
-                nom: nom,
-
-                telephone: telephone,
-
-                whatsapp: whatsapp,
-
-                fixe: fixe,
-
-                autre: autre,
-
-                terrain:
-                    terrainSelectionne.localisation,
-
-                localisation:
-                    terrainSelectionne.localisation,
-
-                superficie:
-                    terrainSelectionne.superficie,
-
-                prix:
-                    terrainSelectionne.prix,
-
-                date:
-                    new Date().toLocaleString(
-                        "fr-FR"
-                    )
-
-            });
-
-
-            localStorage.setItem(
-
-                "r2b_commandes",
-
-                JSON.stringify(commandes)
-
-            );
-
-
-            alert(
-                "Votre commande a été envoyée avec succès !"
-            );
-
-
-            document.getElementById(
-                "client-name"
-            ).value = "";
-
-
-            document.getElementById(
-                "client-phone"
-            ).value = "";
-
-
-            document.getElementById(
-                "client-whatsapp"
-            ).value = "";
-
-
-            document.getElementById(
-                "client-fixe"
-            ).value = "";
-
-
-            document.getElementById(
-                "client-autre"
-            ).value = "";
-
-
-            fermerPanier();
-
-        }
-
-
-        /* =====================================
-           PROTECTION DU TEXTE
-        ===================================== */
-
-        function echapperHTML(texte) {
-
-            const div =
-                document.createElement("div");
-
-            div.textContent =
-                String(texte ?? "");
-
-            return div.innerHTML;
-
-        }
-
-
-        /* =====================================
-           CHARGEMENT
-        ===================================== */
-
-        window.addEventListener(
-            "DOMContentLoaded",
-            function() {
-
-                chargerTerrains();
-
-            }
-        );
-
-
-        /* =====================================
-           DÉPLACEMENT DE LA FENÊTRE
-        ===================================== */
-
-        const el =
-            document.getElementById(
-                "popup-commande"
-            );
-
-        const barre =
-            document.getElementById(
-                "barre-tactile"
-            );
-
-
-        let estEnTrainDeGlisser = false;
-
-        let xInitial = 0;
-        let yInitial = 0;
-
-        let xActuel = 0;
-        let yActuel = 0;
-
-
-        if (barre) {
-
-            barre.addEventListener(
-                "touchstart",
-                function(e) {
-
-                    estEnTrainDeGlisser = true;
-
-                    xInitial =
-                        e.touches[0].clientX
-                        - xActuel;
-
-                    yInitial =
-                        e.touches[0].clientY
-                        - yActuel;
-
-                },
-                {
-                    passive: true
-                }
-            );
-
-
-            document.addEventListener(
-                "touchmove",
-                function(e) {
-
-                    if (!estEnTrainDeGlisser)
-                        return;
-
-
-                    xActuel =
-                        e.touches[0].clientX
-                        - xInitial;
-
-                    yActuel =
-                        e.touches[0].clientY
-                        - yInitial;
-
-
-                    if (el) {
-
-                        el.style.transform =
-                            `translate3d(
-                                ${xActuel}px,
-                                ${yActuel}px,
-                                0
-                            )`;
-
-                    }
-
-                },
-                {
-                    passive: false
-                }
-            );
-
-
-            document.addEventListener(
-                "touchend",
-                function() {
-
-                    estEnTrainDeGlisser = false;
-
-                }
-            );
-
-
-            barre.addEventListener(
-                "mousedown",
-                function(e) {
-
-                    estEnTrainDeGlisser = true;
-
-                    xInitial =
-                        e.clientX - xActuel;
-
-                    yInitial =
-                        e.clientY - yActuel;
-
-                }
-            );
-
-
-            document.addEventListener(
-                "mousemove",
-                function(e) {
-
-                    if (!estEnTrainDeGlisser)
-                        return;
-
-
-                    xActuel =
-                        e.clientX - xInitial;
-
-                    yActuel =
-                        e.clientY - yInitial;
-
-
-                    if (el) {
-
-                        el.style.transform =
-                            `translate3d(
-                                ${xActuel}px,
-                                ${yActuel}px,
-                                0
-                            )`;
-
-                    }
-
-                }
-            );
-
-
-            document.addEventListener(
-                "mouseup",
-                function() {
-
-                    estEnTrainDeGlisser = false;
-
-                }
-            );
-
-        }
-
-    </script>
-
-</body>
-
-        </html>
+                onclick="fermerPanier
