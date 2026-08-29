@@ -1089,6 +1089,17 @@
 
     </script>
 
+<script>
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        const splash = document.getElementById("splash-screen");
+
+        if (splash) {
+            splash.classList.add("hidden");
+        }
+    }, 2000);
+});
+</script>
 </body>
 
     </html>
