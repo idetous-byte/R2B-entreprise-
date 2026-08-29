@@ -1,313 +1,79 @@
-/* ================================
-   R2B ENTREPRISE - STYLE COMPLET
-================================ */
-
-/* Nettoyage global */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Calibri', 'Segoe UI', sans-serif;
-    background-color: #f8f9fa;
-    color: #212529;
-    padding: 20px;
-}
-
-/* ================================
-   ÉCRAN DE DÉMARRAGE
-================================ */
+/* =====================================
+   ÉCRAN DE DÉMARRAGE R2B
+===================================== */
 
 #splash-screen {
     position: fixed;
     inset: 0;
+
     width: 100%;
-    height: 100%;
-    background: #000;
+    height: 100vh;
+
     display: flex;
-    justify-content: center;
     align-items: center;
-    z-index: 9999;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
+    justify-content: center;
+
+    background: #000000;
+
+    z-index: 99999;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition: opacity 0.4s ease,
+                visibility 0.4s ease;
 }
 
 #splash-screen.hidden {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 .splash-box {
-    width: 85%;
-    max-width: 400px;
-    padding: 35px 25px;
-    border: 3px solid #fff;
-    border-radius: 20px;
+    border: 2px solid #ffffff;
+
+    padding: 30px 45px;
+
     text-align: center;
-    color: #fff;
-    background: #000;
+
+    background: #000000;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 25px rgba(255,255,255,0.25);
+
+    min-width: 180px;
 }
 
 .splash-box h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 55px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
+}
+
+.splash-divider {
+    width: 80px;
+    height: 2px;
+
+    background: #ffffff;
+
+    margin: 12px auto;
 }
 
 .splash-box p {
-    font-size: 17px;
-    margin-bottom: 25px;
-}
+    margin: 0;
 
-.splash-loader {
-    width: 45px;
-    height: 45px;
-    border: 4px solid #555;
-    border-top-color: #fff;
-    border-radius: 50%;
-    margin: 0 auto;
-    animation: tourner 1s linear infinite;
-}
+    color: #ffffff;
 
-@keyframes tourner {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* ================================
-   CONTENU PRINCIPAL
-================================ */
-
-#main-content {
-    display: none;
-}
-
-#main-content.visible {
-    display: block;
-}
-
-/* ================================
-   EN-TÊTE
-================================ */
-
-header {
-    background: #000;
-    color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
-
-header p {
-    font-size: 16px;
-}
-
-/* ================================
-   CONTENEUR
-================================ */
-
-.container {
-    width: 100%;
-    max-width: 1000px;
-    margin: auto;
-}
-
-/* ================================
-   CARTES
-================================ */
-
-.card {
-    background: #fff;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-}
-
-.card h2 {
-    margin-bottom: 15px;
-    color: #000;
-}
-
-/* ================================
-   TERRAIN
-================================ */
-
-.terrain-card {
-    background: #fff;
-    border-radius: 15px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.terrain-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-}
-
-.terrain-info {
-    padding: 18px;
-}
-
-.terrain-info h3 {
     font-size: 22px;
-    margin-bottom: 10px;
+
+    letter-spacing: 2px;
 }
-
-.terrain-info p {
-    margin-bottom: 8px;
-    color: #555;
-}
-
-/* ================================
-   TERRAIN INDISPONIBLE
-================================ */
-
-.indisponible {
-    text-align: center;
-    padding: 30px 15px;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-}
-
-.indisponible h2 {
-    color: #000;
-    margin-bottom: 10px;
-}
-
-.indisponible p {
-    color: #666;
-    font-size: 16px;
-}
-
-/* ================================
-   BOUTONS
-================================ */
-
-button,
-.btn {
-    border: none;
-    background: #000;
-    color: #fff;
-    padding: 12px 18px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: inherit;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover,
-.btn:hover {
-    background: #333;
-    transform: translateY(-1px);
-}
-
-/* ================================
-   FORMULAIRES
-================================ */
-
-input,
-textarea,
-select {
-    width: 100%;
-    padding: 12px;
-    margin-top: 7px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: 16px;
-    background: #fff;
-}
-
-textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-label {
-    font-weight: bold;
-    display: block;
-}
-
-/* ================================
-   MESSAGES
-================================ */
-
-.message {
-    padding: 14px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    background: #f1f1f1;
-}
-
-/* ================================
-   FOOTER
-================================ */
-
-footer {
-    margin-top: 30px;
-    padding: 20px;
-    background: #000;
-    color: #fff;
-    text-align: center;
-    border-radius: 15px;
-}
-
-footer p {
-    font-size: 14px;
-}
-
-/* ================================
-   RESPONSIVE TÉLÉPHONE
-================================ */
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 12px;
-    }
-
-    .splash-box {
-        width: 90%;
-        padding: 30px 20px;
-    }
-
-    .splash-box h1 {
-        font-size: 27px;
-    }
-
-    header {
-        padding: 16px;
-    }
-
-    header h1 {
-        font-size: 24px;
-    }
-
-    .card {
-        padding: 15px;
-    }
-
-    .terrain-card img {
-        height: 190px;
-    }
-
-    button,
-    .btn {
-        width: 100%;
-    }
-    }
