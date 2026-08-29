@@ -21,7 +21,7 @@
 
 
         /* =====================================
-           ÉCRAN DE DÉMARRAGE
+           ÉCRAN DE DÉMARRAGE R2B
         ===================================== */
 
         #splash-screen {
@@ -38,7 +38,7 @@
 
             background: #000000;
 
-            z-index: 999999;
+            z-index: 99999;
 
             opacity: 1;
             visibility: visible;
@@ -160,4 +160,1209 @@
 
             cursor: move;
 
-           
+            font-weight: bold;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            user-select: none;
+
+        }
+
+
+        .bouton-fermer {
+
+            cursor: pointer;
+
+            font-size: 1.5rem;
+
+            padding: 0 5px;
+
+        }
+
+
+        .contenu-formulaire {
+
+            padding: 15px;
+
+        }
+
+
+        .details-terrain-choisi {
+
+            background: #f8f9fa;
+
+            padding: 8px 12px;
+
+            border-radius: 6px;
+
+            margin-bottom: 12px;
+
+            font-size: 0.95rem;
+
+            border-left: 4px solid #000;
+
+        }
+
+
+        .ligne-saisie {
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .ligne-saisie label {
+
+            display: block;
+
+            font-size: 0.9rem;
+
+            font-weight: bold;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .ligne-saisie input {
+
+            width: 100%;
+
+            padding: 8px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            box-sizing: border-box;
+
+        }
+
+
+        .btn-soumettre {
+
+            width: 100%;
+
+            background: #000000;
+
+            color: #ffffff;
+
+            border: none;
+
+            padding: 12px;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+        }
+
+
+        .message-vide {
+
+            text-align: center;
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 10px;
+
+            margin: 20px 0;
+
+            color: #555;
+
+        }
+
+
+        .message-erreur {
+
+            text-align: center;
+
+            background: #fff3f3;
+
+            color: #b00020;
+
+            padding: 25px;
+
+            border-radius: 10px;
+
+            margin: 20px 0;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         ÉCRAN DE DÉMARRAGE
+    ===================================== -->
+
+    <div id="splash-screen">
+
+        <div class="splash-box">
+
+            <h1>R2B</h1>
+
+            <div class="splash-divider"></div>
+
+            <p>Entreprise</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         PANIER
+    ===================================== -->
+
+    <div
+        id="client-cart"
+        class="cart-icon"
+        onclick="ouvrirPanier()">
+
+        🛒
+
+        <span id="cart-count">
+            0
+        </span>
+
+    </div>
+
+
+    <!-- =====================================
+         EN-TÊTE
+    ===================================== -->
+
+    <header>
+
+        <div class="main-header-title">
+
+            AVEC R2B ENTREPRISE
+
+        </div>
+
+
+        <p class="main-subtitle">
+
+            Construisez l'avenir dans le présent
+            en achetant des terrains à très bon prix.
+
+        </p>
+
+    </header>
+
+
+    <!-- =====================================
+         TERRAINS
+    ===================================== -->
+
+    <main>
+
+        <div
+            id="terrains-container"
+            class="terrains-grid">
+
+            <div class="message-vide">
+
+                Chargement des terrains...
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================
+         FENÊTRE DE COMMANDE
+    ===================================== -->
+
+    <div
+        id="popup-commande"
+        class="fenetre-flottante">
+
+
+        <div
+            id="barre-tactile"
+            class="barre-deplacement">
+
+
+            <span>
+
+                🖐️ Glissez ici pour déplacer
+
+            </span>
+
+
+            <span
+                class="bouton-fermer"
+                onclick="fermerPanier()">
+
+                &times;
+
+            </span>
+
+        </div>
+
+
+        <div class="contenu-formulaire">
+
+
+            <div
+                id="cart-details"
+                class="details-terrain-choisi">
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Nom et Prénom
+                </label>
+
+                <input
+                    type="text"
+                    id="client-name"
+                    placeholder="Votre nom">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Numéro Appel Direct
+                </label>
+
+                <input
+                    type="tel"
+                    id="client-phone"
+                    placeholder="Ex: 0707070707">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Numéro WhatsApp
+                </label>
+
+                <input
+                    type="tel"
+                    id="client-whatsapp"
+                    placeholder="Ex: 0505050505">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Numéro Fixe
+                </label>
+
+                <input
+                    type="tel"
+                    id="client-fixe"
+                    placeholder="Ex: 2727272727">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Autre moyen où vous êtes joignable
+                </label>
+
+                <input
+                    type="text"
+                    id="client-autre"
+                    placeholder="Ex: Facebook, Email...">
+
+            </div>
+
+
+            <button
+                class="btn-soumettre"
+                onclick="validerEtEnvoyerCommande()">
+
+                Envoyer
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         PIED DE PAGE
+    ===================================== -->
+
+    <footer>
+
+        <div class="footer-info">
+
+            <h3>
+                R2B Entreprise
+            </h3>
+
+
+            <p>
+
+                📍 Notre base : Nagnenefou,
+                non loin de la maternité
+
+            </p>
+
+
+            <p class="copyright">
+
+                &copy; 2026 R2B Entreprise.
+                Tous droits réservés.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================
+         FIREBASE
+    ===================================== -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+
+    <script>
+
+        /* =====================================
+           CONFIGURATION FIREBASE
+        ===================================== */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyA49jSfi5m_aSDUDOSE5s66mwoFF6Bj8FU",
+
+            authDomain:
+                "r2b-entreprise.firebaseapp.com",
+
+            databaseURL:
+                "https://r2b-entreprise-default-rtdb.firebaseio.com",
+
+            projectId:
+                "r2b-entreprise",
+
+            storageBucket:
+                "r2b-entreprise.firebasestorage.app",
+
+            messagingSenderId:
+                "614614560237",
+
+            appId:
+                "1:614614560237:web:6ca754bde319f587590be4"
+
+        };
+
+
+        /* =====================================
+           INITIALISATION FIREBASE
+        ===================================== */
+
+        let database = null;
+
+
+        try {
+
+            firebase.initializeApp(
+                firebaseConfig
+            );
+
+            database =
+                firebase.database();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Erreur initialisation Firebase :",
+                error
+            );
+
+        }
+
+
+        /* =====================================
+           VARIABLES
+        ===================================== */
+
+        let terrains = [];
+
+        let terrainSelectionne = null;
+
+
+        /* =====================================
+           ÉCRAN DE DÉMARRAGE
+        ===================================== */
+
+        window.addEventListener(
+            "load",
+            function () {
+
+                setTimeout(
+                    function () {
+
+                        const splash =
+                            document.getElementById(
+                                "splash-screen"
+                            );
+
+
+                        if (splash) {
+
+                            splash.classList.add(
+                                "hidden"
+                            );
+
+                        }
+
+                    },
+                    2000
+                );
+
+            }
+        );
+
+
+        /* =====================================
+           CHARGER LES TERRAINS
+        ===================================== */
+
+        function chargerTerrains() {
+
+            const container =
+                document.getElementById(
+                    "terrains-container"
+                );
+
+
+            if (!container) {
+                return;
+            }
+
+
+            if (!database) {
+
+                container.innerHTML = `
+
+                    <div class="message-erreur">
+
+                        Erreur de connexion
+                        à Firebase.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            database
+                .ref("r2b_terrains")
+                .on(
+                    "value",
+
+                    function (snapshot) {
+
+                        terrains = [];
+
+
+                        snapshot.forEach(
+                            function (childSnapshot) {
+
+                                const donnees =
+                                    childSnapshot.val();
+
+
+                                if (
+                                    donnees &&
+                                    typeof donnees === "object"
+                                ) {
+
+                                    terrains.push({
+
+                                        id:
+                                            childSnapshot.key,
+
+                                        superficie:
+                                            donnees.superficie || "",
+
+                                        localisation:
+                                            donnees.localisation || "",
+
+                                        prix:
+                                            donnees.prix || "",
+
+                                        date:
+                                            donnees.date || ""
+
+                                    });
+
+                                }
+
+                            }
+                        );
+
+
+                        afficherTerrains();
+
+                    },
+
+                    function (error) {
+
+                        console.error(
+                            "Erreur Firebase :",
+                            error
+                        );
+
+
+                        container.innerHTML = `
+
+                            <div class="message-erreur">
+
+                                <strong>
+                                    Impossible de charger les terrains.
+                                </strong>
+
+                                <br><br>
+
+                                ${echapperHTML(
+                                    error.message
+                                )}
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+        }
+
+
+        /* =====================================
+           AFFICHER LES TERRAINS
+        ===================================== */
+
+        function afficherTerrains() {
+
+            const container =
+                document.getElementById(
+                    "terrains-container"
+                );
+
+
+            if (!container) {
+                return;
+            }
+
+
+            container.innerHTML = "";
+
+
+            if (terrains.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="message-vide">
+
+                        Aucun terrain disponible
+                        pour le moment.
+
+                        <br><br>
+
+                        <strong>
+                            Terrain indisponible.
+                        </strong>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            terrains.forEach(
+                function (t, index) {
+
+                    container.innerHTML += `
+
+                        <div class="card-terrain">
+
+                            <h2>
+
+                                🏡 Terrain ${index + 1}
+
+                            </h2>
+
+
+                            <p class="info-line">
+
+                                📐
+
+                                <strong>
+                                    Superficie :
+                                </strong>
+
+                                ${echapperHTML(
+                                    t.superficie
+                                )}
+
+                            </p>
+
+
+                            <p class="info-line">
+
+                                📍
+
+                                <strong>
+                                    Localisation :
+                                </strong>
+
+                                ${echapperHTML(
+                                    t.localisation
+                                )}
+
+                            </p>
+
+
+                            <p class="price-line">
+
+                                💰
+
+                                ${echapperHTML(
+                                    t.prix
+                                )}
+
+                                FCFA
+
+                            </p>
+
+
+                            <button
+                                class="btn-order"
+                                onclick="selectionnerTerrain(${index})">
+
+                                Commander ce terrain
+
+                            </button>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+        }
+
+
+        /* =====================================
+           SÉLECTIONNER UN TERRAIN
+        ===================================== */
+
+        function selectionnerTerrain(index) {
+
+            if (!terrains[index]) {
+                return;
+            }
+
+
+            terrainSelectionne =
+                terrains[index];
+
+
+            const details =
+                document.getElementById(
+                    "cart-details"
+                );
+
+
+            if (details) {
+
+                details.innerHTML = `
+
+                    <strong>
+                        Terrain sélectionné
+                    </strong>
+
+                    <br>
+
+                    Localisation :
+                    ${echapperHTML(
+                        terrainSelectionne.localisation
+                    )}
+
+                    <br>
+
+                    Superficie :
+                    ${echapperHTML(
+                        terrainSelectionne.superficie
+                    )}
+
+                    <br>
+
+                    Prix :
+                    ${echapperHTML(
+                        terrainSelectionne.prix
+                    )}
+
+                    FCFA
+
+                `;
+
+            }
+
+
+            const popup =
+                document.getElementById(
+                    "popup-commande"
+                );
+
+
+            if (popup) {
+
+                popup.style.display =
+                    "block";
+
+            }
+
+
+            const compteur =
+                document.getElementById(
+                    "cart-count"
+                );
+
+
+            if (compteur) {
+
+                compteur.textContent = "1";
+
+            }
+
+        }
+
+
+        /* =====================================
+           OUVRIR PANIER
+        ===================================== */
+
+        function ouvrirPanier() {
+
+            if (!terrainSelectionne) {
+
+                alert(
+                    "Veuillez d'abord sélectionner un terrain."
+                );
+
+                return;
+
+            }
+
+
+            const popup =
+                document.getElementById(
+                    "popup-commande"
+                );
+
+
+            if (popup) {
+
+                popup.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        /* =====================================
+           FERMER PANIER
+        ===================================== */
+
+        function fermerPanier() {
+
+            const popup =
+                document.getElementById(
+                    "popup-commande"
+                );
+
+
+            if (popup) {
+
+                popup.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /* =====================================
+           ENVOYER LA COMMANDE
+        ===================================== */
+
+        function validerEtEnvoyerCommande() {
+
+            if (!terrainSelectionne) {
+
+                alert(
+                    "Veuillez sélectionner un terrain."
+                );
+
+                return;
+
+            }
+
+
+            if (!database) {
+
+                alert(
+                    "Connexion Firebase indisponible."
+                );
+
+                return;
+
+            }
+
+
+            const nom =
+                document.getElementById(
+                    "client-name"
+                ).value.trim();
+
+
+            const telephone =
+                document.getElementById(
+                    "client-phone"
+                ).value.trim();
+
+
+            const whatsapp =
+                document.getElementById(
+                    "client-whatsapp"
+                ).value.trim();
+
+
+            const fixe =
+                document.getElementById(
+                    "client-fixe"
+                ).value.trim();
+
+
+            const autre =
+                document.getElementById(
+                    "client-autre"
+                ).value.trim();
+
+
+            if (
+                !nom ||
+                !telephone ||
+                !whatsapp
+            ) {
+
+                alert(
+                    "Veuillez remplir votre nom, " +
+                    "votre numéro d'appel et votre WhatsApp."
+                );
+
+                return;
+
+            }
+
+
+            const commande = {
+
+                nom:
+                    nom,
+
+                telephone:
+                    telephone,
+
+                whatsapp:
+                    whatsapp,
+
+                fixe:
+                    fixe,
+
+                autre:
+                    autre,
+
+                terrain:
+                    terrainSelectionne.localisation,
+
+                localisation:
+                    terrainSelectionne.localisation,
+
+                superficie:
+                    terrainSelectionne.superficie,
+
+                prix:
+                    terrainSelectionne.prix,
+
+                date:
+                    new Date().toLocaleString(
+                        "fr-FR"
+                    )
+
+            };
+
+
+            database
+                .ref("r2b_commandes")
+                .push(commande)
+
+                .then(
+                    function () {
+
+                        alert(
+                            "Votre commande a été envoyée avec succès !"
+                        );
+
+
+                        document.getElementById(
+                            "client-name"
+                        ).value = "";
+
+
+                        document.getElementById(
+                            "client-phone"
+                        ).value = "";
+
+
+                        document.getElementById(
+                            "client-whatsapp"
+                        ).value = "";
+
+
+                        document.getElementById(
+                            "client-fixe"
+                        ).value = "";
+
+
+                        document.getElementById(
+                            "client-autre"
+                        ).value = "";
+
+
+                        fermerPanier();
+
+                    }
+                )
+
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "Erreur commande :",
+                            error
+                        );
+
+
+                        alert(
+                            "Erreur Firebase : " +
+                            error.message
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /* =====================================
+           PROTECTION HTML
+        ===================================== */
+
+        function echapperHTML(texte) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.textContent =
+                String(texte ?? "");
+
+
+            return div.innerHTML;
+
+        }
+
+
+        /* =====================================
+           DÉPLACEMENT DE LA FENÊTRE
+        ===================================== */
+
+        let fenetre = null;
+
+        let barre = null;
+
+        let deplacement = false;
+
+        let decalageX = 0;
+
+        let decalageY = 0;
+
+
+        window.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                chargerTerrains();
+
+
+                fenetre =
+                    document.getElementById(
+                        "popup-commande"
+                    );
+
+
+                barre =
+                    document.getElementById(
+                        "barre-tactile"
+                    );
+
+
+                if (
+                    !fenetre ||
+                    !barre
+                ) {
+
+                    return;
+
+                }
+
+
+                barre.addEventListener(
+                    "pointerdown",
+                    function (event) {
+
+                        deplacement =
+                            true;
+
+
+                        const rect =
+                            fenetre.getBoundingClientRect();
+
+
+                        decalageX =
+                            event.clientX -
+                            rect.left;
+
+
+                        decalageY =
+                            event.clientY -
+                            rect.top;
+
+
+                        try {
+
+                            barre.setPointerCapture(
+                                event.pointerId
+                            );
+
+                        } catch (e) {}
+
+                    }
+                );
+
+
+                barre.addEventListener(
+                    "pointermove",
+                    function (event) {
+
+                        if (!deplacement) {
+                            return;
+                        }
+
+
+                        fenetre.style.left =
+                            (
+                                event.clientX -
+                                decalageX
+                            ) + "px";
+
+
+                        fenetre.style.top =
+                            (
+                                event.clientY -
+                                decalageY
+                            ) + "px";
+
+
+                        fenetre.style.transform =
+                            "none";
+
+                    }
+                );
+
+
+                barre.addEventListener(
+                    "pointerup",
+                    function () {
+
+                        deplacement =
+                            false;
+
+                    }
+                );
+
+
+                barre.addEventListener(
+                    "pointercancel",
+                    function () {
+
+                        deplacement =
+                            false;
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+        </html>
