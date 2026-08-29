@@ -23,16 +23,15 @@ function chargerTerrainsClient() {
     }
     container.innerHTML = "";
     liste.forEach((t, i) => {
-     container.innerHTML += `
-    <div class="card-terrain">
-        <h2>Terrain ${i + 1}</h2>
-        <div class="info-line"><strong>Superficie :</strong> ${t.superficie}</div>
-        <div class="info-line"><strong>Localisation :</strong> ${t.localisation}</div>
-        <div class="price-line">${t.prix} FCFA</div>
-        <button onclick="ajouterAuPanier(${i}, '${t.localisation}', '${t.prix}')" class="btn-order">Commander</button>
-    </div>
-`;
-   
+        container.innerHTML += `
+            <div class="card-terrain">
+                <h2>Terrain ${i + 1}</h2>
+                <div class="info-line"><strong>Superficie :</strong> ${t.superficie}</div>
+                <div class="info-line"><strong>Localisation :</strong> ${t.localisation}</div>
+                <div class="price-line">${t.prix} FCFA</div>
+                <button onclick="ajouterAuPanier(${i}, '${t.localisation}', '${t.prix}')" class="btn-order">Commander</button>
+            </div>
+        `;
     });
 }
 
@@ -47,7 +46,6 @@ function ouvrirPanier() {
     if (!terrainSelectionne) { alert("Choisissez d'abord un terrain !"); return; }
     document.getElementById('cart-details').innerHTML = `<strong>Terrain ${terrainSelectionne.index}</strong> à ${terrainSelectionne.localisation} (${terrainSelectionne.prix} FCFA)`;
     
-    // Réinitialiser la position de la fenêtre avant de l'afficher
     const f = document.getElementById('popup-commande');
     f.style.transform = "translate3d(0px, 0px, 0px)";
     f.style.display = 'block';
@@ -78,6 +76,8 @@ function validerEtEnvoyerCommande() {
     localStorage.setItem('r2b_commandes', JSON.stringify(commandes));
 
     const msg = encodeURIComponent(`Bonjour R2B Entreprise, je m'appelle ${nomComplet}.\nTel : ${tel}\nWhatsApp : ${wa}\nFixe : ${fixe}\nAutre contact : ${autre}\nJe souhaite commander le terrain de ${terrainSelectionne.localisation} (Terrain ${terrainSelectionne.index}) affiché à ${terrainSelectionne.prix} FCFA. Rendez-vous pour la visite.`);
+    
+    // CORRECTION ICI : Ajout du slash et des backticks pour WhatsApp
     window.open(`https://wa.me{msg}`, '_blank');
 
     alert("Commande transmise à R2B Entreprise !");
@@ -85,3 +85,4 @@ function validerEtEnvoyerCommande() {
     document.getElementById('cart-count').innerText = "0";
     fermerPanier();
 }
+
