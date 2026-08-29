@@ -19,11 +19,44 @@
             font-family: 'Calibri', 'Segoe UI', sans-serif;
         }
 
-        /* =========================
-           FENÊTRE DE COMMANDE
-           ========================= */
+
+        /* =====================================
+           ÉCRAN DE DÉMARRAGE R2B
+           ===================================== */
+
+        #splash-screen {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #ffffff;
+
+            z-index: 99999;
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transition: opacity 0.5s ease;
+        }
+
+
+        /* =====================================
+           FENÊTRE FLOTTANTE
+           ===================================== */
 
         .fenetre-flottante {
+
             display: none;
 
             position: fixed;
@@ -32,6 +65,7 @@
             left: 5%;
 
             width: 90%;
+
             max-width: 360px;
 
             background: #ffffff;
@@ -40,14 +74,21 @@
 
             border-radius: 12px;
 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.4);
 
             z-index: 10005;
 
             touch-action: none;
         }
 
+
+        /* =====================================
+           BARRE DE DÉPLACEMENT
+           ===================================== */
+
         .barre-deplacement {
+
             background: #000000;
 
             color: #ffffff;
@@ -67,7 +108,9 @@
             user-select: none;
         }
 
+
         .bouton-fermer {
+
             cursor: pointer;
 
             font-size: 1.5rem;
@@ -75,11 +118,19 @@
             padding: 0 5px;
         }
 
+
+        /* =====================================
+           FORMULAIRE
+           ===================================== */
+
         .contenu-formulaire {
+
             padding: 15px;
         }
 
+
         .details-terrain-choisi {
+
             background: #f8f9fa;
 
             padding: 8px 12px;
@@ -93,11 +144,15 @@
             border-left: 4px solid #000;
         }
 
+
         .ligne-saisie {
+
             margin-bottom: 10px;
         }
 
+
         .ligne-saisie label {
+
             display: block;
 
             font-size: 0.9rem;
@@ -107,7 +162,9 @@
             margin-bottom: 3px;
         }
 
+
         .ligne-saisie input {
+
             width: 100%;
 
             padding: 8px;
@@ -119,12 +176,14 @@
             box-sizing: border-box;
         }
 
+
         .btn-soumettre {
+
             width: 100%;
 
-            background: #000;
+            background: #000000;
 
-            color: #fff;
+            color: #ffffff;
 
             border: none;
 
@@ -147,9 +206,9 @@
 <body>
 
 
-    <!-- =========================
+    <!-- =====================================
          ÉCRAN DE DÉMARRAGE
-         ========================= -->
+         ===================================== -->
 
     <div id="splash-screen">
 
@@ -166,9 +225,9 @@
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================
          PANIER
-         ========================= -->
+         ===================================== -->
 
     <div
         id="client-cart"
@@ -177,14 +236,16 @@
 
         🛒
 
-        <span id="cart-count">0</span>
+        <span id="cart-count">
+            0
+        </span>
 
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================
          EN-TÊTE
-         ========================= -->
+         ===================================== -->
 
     <header>
 
@@ -193,6 +254,7 @@
             AVEC R2B ENTREPRISE
 
         </div>
+
 
         <p class="main-subtitle">
 
@@ -204,9 +266,9 @@
     </header>
 
 
-    <!-- =========================
+    <!-- =====================================
          TERRAINS
-         ========================= -->
+         ===================================== -->
 
     <main>
 
@@ -219,9 +281,9 @@
     </main>
 
 
-    <!-- =========================
+    <!-- =====================================
          FENÊTRE DE COMMANDE
-         ========================= -->
+         ===================================== -->
 
     <div
         id="popup-commande"
@@ -232,8 +294,11 @@
             id="barre-tactile"
             class="barre-deplacement">
 
+
             <span>
+
                 🖐️ Glissez ici pour déplacer
+
             </span>
 
 
@@ -244,6 +309,7 @@
                 &times;
 
             </span>
+
 
         </div>
 
@@ -342,16 +408,18 @@
     </div>
 
 
-    <!-- =========================
+    <!-- =====================================
          PIED DE PAGE
-         ========================= -->
+         ===================================== -->
 
     <footer>
+
 
         <div id="google_translate_element"></div>
 
 
         <div class="footer-info">
+
 
             <h3>
                 R2B Entreprise
@@ -371,39 +439,36 @@
 
             </p>
 
+
         </div>
+
 
     </footer>
 
 
-    <!-- =========================
+    <!-- =====================================
          GOOGLE TRADUCTION
-         ========================= -->
+         ===================================== -->
 
     <script>
 
         function googleTranslateElementInit() {
 
-            if (
-                typeof google !== "undefined" &&
-                google.translate
-            ) {
+            new google.translate.TranslateElement(
 
-                new google.translate.TranslateElement(
+                {
 
-                    {
-                        pageLanguage: "fr",
+                    pageLanguage: 'fr',
 
-                        layout:
-                            google.translate.TranslateElement
-                            .InlineLayout.SIMPLE
-                    },
+                    layout:
+                        google.translate.TranslateElement
+                        .InlineLayout.SIMPLE
 
-                    "google_translate_element"
+                },
 
-                );
+                'google_translate_element'
 
-            }
+            );
 
         }
 
@@ -411,88 +476,136 @@
 
 
     <script
+        type="text/javascript"
         src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
 
 
-    <!-- =========================
+    <!-- =====================================
          SCRIPT PRINCIPAL
-         ========================= -->
+         ===================================== -->
 
     <script src="Script.js"></script>
 
 
-    <!-- =========================
-         DÉMARRAGE
-         ========================= -->
+    <!-- =====================================
+         DÉMARRAGE R2B
+         ===================================== -->
 
     <script>
 
-        window.addEventListener("DOMContentLoaded", function () {
+        window.addEventListener(
+            "DOMContentLoaded",
+            function () {
 
-            setTimeout(function () {
 
                 const splash =
-                    document.getElementById("splash-screen");
+                    document.getElementById(
+                        "splash-screen"
+                    );
+
 
                 if (!splash) return;
 
-                splash.style.opacity = "0";
 
-                setTimeout(function () {
+                /*
+                 * Le démarrage reste visible
+                 * pendant 3 secondes.
+                 */
 
-                    splash.style.visibility = "hidden";
+                setTimeout(
+                    function () {
 
-                }, 500);
 
-            }, 3000);
+                        splash.style.opacity =
+                            "0";
 
-        });
+
+                        setTimeout(
+                            function () {
+
+                                splash.style.visibility =
+                                    "hidden";
+
+                            },
+                            500
+                        );
+
+
+                    },
+                    3000
+                );
+
+
+            }
+        );
 
     </script>
 
 
-    <!-- =========================
+    <!-- =====================================
          DÉPLACEMENT DE LA FENÊTRE
-         ========================= -->
+         ===================================== -->
 
     <script>
 
+
         const el =
-            document.getElementById("popup-commande");
+            document.getElementById(
+                "popup-commande"
+            );
+
 
         const barre =
-            document.getElementById("barre-tactile");
+            document.getElementById(
+                "barre-tactile"
+            );
 
 
-        let estEnTrainDeGlisser = false;
+        let estEnTrainDeGlisser =
+            false;
+
 
         let xInitial = 0;
+
         let yInitial = 0;
 
+
         let xActuel = 0;
+
         let yActuel = 0;
 
 
         if (barre) {
 
 
-            /* TÉLÉPHONE */
+            /* =========================
+               TACTILE
+               ========================= */
 
             barre.addEventListener(
                 "touchstart",
                 function(e) {
 
-                    estEnTrainDeGlisser = true;
+
+                    estEnTrainDeGlisser =
+                        true;
+
 
                     xInitial =
-                        e.touches[0].clientX - xActuel;
+                        e.touches[0].clientX
+                        - xActuel;
+
 
                     yInitial =
-                        e.touches[0].clientY - yActuel;
+                        e.touches[0].clientY
+                        - yActuel;
+
 
                 },
-                { passive: true }
+                {
+                    passive: true
+                }
             );
 
 
@@ -500,17 +613,24 @@
                 "touchmove",
                 function(e) {
 
-                    if (!estEnTrainDeGlisser)
-                        return;
+
+                    if (
+                        !estEnTrainDeGlisser
+                    ) return;
+
 
                     xActuel =
-                        e.touches[0].clientX - xInitial;
+                        e.touches[0].clientX
+                        - xInitial;
+
 
                     yActuel =
-                        e.touches[0].clientY - yInitial;
+                        e.touches[0].clientY
+                        - yInitial;
 
 
                     if (el) {
+
 
                         el.style.transform =
                             `translate3d(
@@ -519,10 +639,14 @@
                                 0
                             )`;
 
+
                     }
 
+
                 },
-                { passive: false }
+                {
+                    passive: false
+                }
             );
 
 
@@ -530,25 +654,33 @@
                 "touchend",
                 function() {
 
-                    estEnTrainDeGlisser = false;
+                    estEnTrainDeGlisser =
+                        false;
 
                 }
             );
 
 
-            /* ORDINATEUR */
+            /* =========================
+               SOURIS
+               ========================= */
 
             barre.addEventListener(
                 "mousedown",
                 function(e) {
 
-                    estEnTrainDeGlisser = true;
+
+                    estEnTrainDeGlisser =
+                        true;
+
 
                     xInitial =
                         e.clientX - xActuel;
 
+
                     yInitial =
                         e.clientY - yActuel;
+
 
                 }
             );
@@ -558,17 +690,22 @@
                 "mousemove",
                 function(e) {
 
-                    if (!estEnTrainDeGlisser)
-                        return;
+
+                    if (
+                        !estEnTrainDeGlisser
+                    ) return;
+
 
                     xActuel =
                         e.clientX - xInitial;
+
 
                     yActuel =
                         e.clientY - yInitial;
 
 
                     if (el) {
+
 
                         el.style.transform =
                             `translate3d(
@@ -577,7 +714,9 @@
                                 0
                             )`;
 
+
                     }
+
 
                 }
             );
@@ -587,7 +726,8 @@
                 "mouseup",
                 function() {
 
-                    estEnTrainDeGlisser = false;
+                    estEnTrainDeGlisser =
+                        false;
 
                 }
             );
