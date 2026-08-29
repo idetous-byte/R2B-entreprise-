@@ -16,9 +16,9 @@
             font-family: 'Calibri', 'Segoe UI', sans-serif;
         }
 
-        /* =====================================
-           ÉCRAN DE DÉMARRAGE R2B
-        ===================================== */
+        /* ================================
+           ÉCRAN DE DÉMARRAGE
+        ================================= */
 
         #splash-screen {
             position: fixed;
@@ -30,9 +30,9 @@
             align-items: center;
             justify-content: center;
 
-            background: #000000;
+            background: #000;
 
-            z-index: 99999;
+            z-index: 999999;
 
             opacity: 1;
             visibility: visible;
@@ -49,56 +49,40 @@
         }
 
         .splash-box {
-            border: 2px solid #ffffff;
-
+            border: 2px solid #fff;
             padding: 30px 45px;
-
             text-align: center;
-
-            background: #000000;
-
+            background: #000;
             border-radius: 12px;
-
-            box-shadow:
-                0 0 25px rgba(255, 255, 255, 0.25);
-
+            box-shadow: 0 0 25px rgba(255,255,255,0.25);
             min-width: 180px;
         }
 
         .splash-box h1 {
             margin: 0;
-
-            color: #ffffff;
-
+            color: #fff;
             font-size: 55px;
-
             font-weight: bold;
-
             letter-spacing: 5px;
         }
 
         .splash-divider {
             width: 80px;
             height: 2px;
-
-            background: #ffffff;
-
+            background: #fff;
             margin: 12px auto;
         }
 
         .splash-box p {
             margin: 0;
-
-            color: #ffffff;
-
+            color: #fff;
             font-size: 22px;
-
             letter-spacing: 2px;
         }
 
-        /* =====================================
-           FENÊTRE DE COMMANDE
-        ===================================== */
+        /* ================================
+           FENÊTRE COMMANDE
+        ================================= */
 
         .fenetre-flottante {
             display: none;
@@ -111,14 +95,14 @@
             width: 90%;
             max-width: 360px;
 
-            background: #ffffff;
+            background: #fff;
 
-            border: 2px solid #000000;
+            border: 2px solid #000;
 
             border-radius: 12px;
 
             box-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.4);
+                0 10px 30px rgba(0,0,0,0.4);
 
             z-index: 10005;
 
@@ -126,9 +110,8 @@
         }
 
         .barre-deplacement {
-            background: #000000;
-
-            color: #ffffff;
+            background: #000;
+            color: #fff;
 
             padding: 12px;
 
@@ -137,9 +120,7 @@
             font-weight: bold;
 
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
 
             user-select: none;
@@ -147,9 +128,7 @@
 
         .bouton-fermer {
             cursor: pointer;
-
             font-size: 1.5rem;
-
             padding: 0 5px;
         }
 
@@ -159,15 +138,10 @@
 
         .details-terrain-choisi {
             background: #f8f9fa;
-
             padding: 8px 12px;
-
             border-radius: 6px;
-
             margin-bottom: 12px;
-
             font-size: 0.95rem;
-
             border-left: 4px solid #000;
         }
 
@@ -177,57 +151,37 @@
 
         .ligne-saisie label {
             display: block;
-
             font-size: 0.9rem;
-
             font-weight: bold;
-
             margin-bottom: 3px;
         }
 
         .ligne-saisie input {
             width: 100%;
-
             padding: 8px;
-
             border: 1px solid #ccc;
-
             border-radius: 6px;
-
             box-sizing: border-box;
         }
 
         .btn-soumettre {
             width: 100%;
-
-            background: #000000;
-
-            color: #ffffff;
-
+            background: #000;
+            color: #fff;
             border: none;
-
             padding: 12px;
-
             border-radius: 6px;
-
             font-weight: bold;
-
             text-transform: uppercase;
-
             cursor: pointer;
         }
 
         .message-vide {
             text-align: center;
-
-            background: white;
-
+            background: #fff;
             padding: 25px;
-
             border-radius: 10px;
-
             margin: 20px 0;
-
             color: #555;
         }
     </style>
@@ -235,9 +189,9 @@
 
 <body>
 
-    <!-- =====================================
+    <!-- ================================
          ÉCRAN DE DÉMARRAGE
-    ===================================== -->
+    ================================= -->
 
     <div id="splash-screen">
 
@@ -254,9 +208,44 @@
     </div>
 
 
-    <!-- =====================================
+    <!-- ================================
+         CE SCRIPT EST INDÉPENDANT
+         DE FIREBASE
+    ================================= -->
+
+    <script>
+        (function () {
+
+            function fermerSplash() {
+
+                var splash =
+                    document.getElementById("splash-screen");
+
+                if (splash) {
+                    splash.classList.add("hidden");
+                }
+
+            }
+
+            /*
+             * Le démarrage est programmé
+             * immédiatement.
+             * Firebase ne peut donc pas
+             * empêcher sa disparition.
+             */
+
+            setTimeout(
+                fermerSplash,
+                2000
+            );
+
+        })();
+    </script>
+
+
+    <!-- ================================
          PANIER
-    ===================================== -->
+    ================================= -->
 
     <div
         id="client-cart"
@@ -272,9 +261,9 @@
     </div>
 
 
-    <!-- =====================================
+    <!-- ================================
          EN-TÊTE
-    ===================================== -->
+    ================================= -->
 
     <header>
 
@@ -290,9 +279,9 @@
     </header>
 
 
-    <!-- =====================================
+    <!-- ================================
          TERRAINS
-    ===================================== -->
+    ================================= -->
 
     <main>
 
@@ -309,9 +298,9 @@
     </main>
 
 
-    <!-- =====================================
+    <!-- ================================
          FENÊTRE DE COMMANDE
-    ===================================== -->
+    ================================= -->
 
     <div
         id="popup-commande"
@@ -319,4 +308,367 @@
 
         <div
             id="barre-tactile"
-           
+            class="barre-deplacement">
+
+            <span>
+                🖐️ Glissez ici pour déplacer
+            </span>
+
+            <span
+                class="bouton-fermer"
+                onclick="fermerPanier()">
+
+                &times;
+
+            </span>
+
+        </div>
+
+
+        <div class="contenu-formulaire">
+
+            <div
+                id="cart-details"
+                class="details-terrain-choisi">
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Nom et Prénom
+                </label>
+
+                <input
+                    type="text"
+                    id="client-name"
+                    placeholder="Votre nom">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Numéro Appel Direct
+                </label>
+
+                <input
+                    type="tel"
+                    id="client-phone"
+                    placeholder="Ex: 0707070707">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Numéro WhatsApp
+                </label>
+
+                <input
+                    type="tel"
+                    id="client-whatsapp"
+                    placeholder="Ex: 0505050505">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Numéro Fixe
+                </label>
+
+                <input
+                    type="tel"
+                    id="client-fixe"
+                    placeholder="Ex: 2727272727">
+
+            </div>
+
+
+            <div class="ligne-saisie">
+
+                <label>
+                    Autre moyen où vous êtes joignable
+                </label>
+
+                <input
+                    type="text"
+                    id="client-autre"
+                    placeholder="Ex: Facebook, Email...">
+
+            </div>
+
+
+            <button
+                class="btn-soumettre"
+                onclick="validerEtEnvoyerCommande()">
+
+                Envoyer
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================================
+         PIED DE PAGE
+    ================================= -->
+
+    <footer>
+
+        <div class="footer-info">
+
+            <h3>
+                R2B Entreprise
+            </h3>
+
+            <p>
+                📍 Notre base : Nagnenefou,
+                non loin de la maternité
+            </p>
+
+            <p class="copyright">
+                &copy; 2026 R2B Entreprise.
+                Tous droits réservés.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================================
+         FIREBASE
+    ================================= -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+
+    <script>
+
+        /* ================================
+           CONFIGURATION FIREBASE
+        ================================= */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyA49jSfi5m_aSDUDOSE5s66mwoFF6Bj8FU",
+
+            authDomain:
+                "r2b-entreprise.firebaseapp.com",
+
+            databaseURL:
+                "https://r2b-entreprise-default-rtdb.firebaseio.com",
+
+            projectId:
+                "r2b-entreprise",
+
+            storageBucket:
+                "r2b-entreprise.firebasestorage.app",
+
+            messagingSenderId:
+                "614614560237",
+
+            appId:
+                "1:614614560237:web:6ca754bde319f587590be4"
+
+        };
+
+
+        /* ================================
+           INITIALISATION
+        ================================= */
+
+        let database = null;
+
+        try {
+
+            firebase.initializeApp(
+                firebaseConfig
+            );
+
+            database =
+                firebase.database();
+
+        } catch (error) {
+
+            console.error(
+                "Erreur initialisation Firebase :",
+                error
+            );
+
+        }
+
+
+        /* ================================
+           VARIABLES
+        ================================= */
+
+        let terrains = [];
+
+        let terrainSelectionne = null;
+
+
+        /* ================================
+           CHARGER LES TERRAINS
+        ================================= */
+
+        function chargerTerrains() {
+
+            const container =
+                document.getElementById(
+                    "terrains-container"
+                );
+
+            if (!container) return;
+
+
+            if (!database) {
+
+                container.innerHTML = `
+
+                    <div class="message-vide">
+
+                        Impossible de se connecter
+                        à la base de données.
+
+                        <br><br>
+
+                        Veuillez vérifier la connexion.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            database
+                .ref("r2b_terrains")
+                .on(
+
+                    "value",
+
+                    function (snapshot) {
+
+                        terrains = [];
+
+
+                        snapshot.forEach(
+                            function (childSnapshot) {
+
+                                terrains.push({
+
+                                    id:
+                                        childSnapshot.key,
+
+                                    ...childSnapshot.val()
+
+                                });
+
+                            }
+                        );
+
+
+                        afficherTerrains();
+
+                    },
+
+                    function (error) {
+
+                        console.error(
+                            "Erreur Firebase :",
+                            error
+                        );
+
+
+                        container.innerHTML = `
+
+                            <div class="message-vide">
+
+                                Impossible de charger
+                                les terrains.
+
+                                <br><br>
+
+                                Vérifiez votre connexion.
+
+                            </div>
+
+                        `;
+
+                    }
+
+                );
+
+        }
+
+
+        /* ================================
+           AFFICHER LES TERRAINS
+        ================================= */
+
+        function afficherTerrains() {
+
+            const container =
+                document.getElementById(
+                    "terrains-container"
+                );
+
+            if (!container) return;
+
+
+            container.innerHTML = "";
+
+
+            if (terrains.length === 0) {
+
+                container.innerHTML = `
+
+                    <div class="message-vide">
+
+                        Aucun terrain disponible
+                        pour le moment.
+
+                        <br><br>
+
+                        <strong>
+                            Terrain indisponible.
+                        </strong>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            terrains.forEach(
+                function (t, index) {
+
+                    container.innerHTML += `
+
+                        <div class="card-terrain">
+
+                            <h2>
+                                🏡 Terrain ${index + 1}
+                            </h2>
+
+                            <p class="info-line">
+
+                                📐
+
+                                <
