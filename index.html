@@ -39,7 +39,7 @@
             align-items: center;
             justify-content: center;
 
-            background: #ffffff;
+            background: #000000;
 
             z-index: 99999;
 
@@ -48,6 +48,87 @@
             visibility: visible;
 
             transition: opacity 0.5s ease;
+
+            font-family: 'Calibri', 'Segoe UI', sans-serif;
+        }
+
+
+        /* =====================================
+           CADRE BLANC DU DÉMARRAGE
+           ===================================== */
+
+        .splash-box {
+
+            border: 2px solid #ffffff;
+
+            padding: 30px 45px;
+
+            text-align: center;
+
+            background: #000000;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 0 25px rgba(255,255,255,0.25);
+
+            min-width: 180px;
+        }
+
+
+        /* =====================================
+           LOGO R2B
+           ===================================== */
+
+        .splash-box h1 {
+
+            margin: 0;
+
+            color: #ffffff;
+
+            font-family: 'Calibri', 'Segoe UI', sans-serif;
+
+            font-size: 55px;
+
+            font-weight: bold;
+
+            letter-spacing: 5px;
+        }
+
+
+        /* =====================================
+           LIGNE ENTRE R2B ET ENTREPRISE
+           ===================================== */
+
+        .splash-divider {
+
+            width: 80px;
+
+            height: 2px;
+
+            background: #ffffff;
+
+            margin: 12px auto;
+        }
+
+
+        /* =====================================
+           ENTREPRISE
+           ===================================== */
+
+        .splash-box p {
+
+            margin: 0;
+
+            color: #ffffff;
+
+            font-family: 'Calibri', 'Segoe UI', sans-serif;
+
+            font-size: 22px;
+
+            font-weight: normal;
+
+            letter-spacing: 2px;
         }
 
 
@@ -489,66 +570,10 @@
 
 
     <!-- =====================================
-         DÉMARRAGE R2B
-         ===================================== -->
-
-    <script>
-
-        window.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-
-                const splash =
-                    document.getElementById(
-                        "splash-screen"
-                    );
-
-
-                if (!splash) return;
-
-
-                /*
-                 * Le démarrage reste visible
-                 * pendant 3 secondes.
-                 */
-
-                setTimeout(
-                    function () {
-
-
-                        splash.style.opacity =
-                            "0";
-
-
-                        setTimeout(
-                            function () {
-
-                                splash.style.visibility =
-                                    "hidden";
-
-                            },
-                            500
-                        );
-
-
-                    },
-                    3000
-                );
-
-
-            }
-        );
-
-    </script>
-
-
-    <!-- =====================================
          DÉPLACEMENT DE LA FENÊTRE
          ===================================== -->
 
     <script>
-
 
         const el =
             document.getElementById(
@@ -587,20 +612,16 @@
                 "touchstart",
                 function(e) {
 
-
                     estEnTrainDeGlisser =
                         true;
-
 
                     xInitial =
                         e.touches[0].clientX
                         - xActuel;
 
-
                     yInitial =
                         e.touches[0].clientY
                         - yActuel;
-
 
                 },
                 {
@@ -613,24 +634,19 @@
                 "touchmove",
                 function(e) {
 
-
                     if (
                         !estEnTrainDeGlisser
                     ) return;
-
 
                     xActuel =
                         e.touches[0].clientX
                         - xInitial;
 
-
                     yActuel =
                         e.touches[0].clientY
                         - yInitial;
 
-
                     if (el) {
-
 
                         el.style.transform =
                             `translate3d(
@@ -639,9 +655,7 @@
                                 0
                             )`;
 
-
                     }
-
 
                 },
                 {
@@ -669,18 +683,14 @@
                 "mousedown",
                 function(e) {
 
-
                     estEnTrainDeGlisser =
                         true;
-
 
                     xInitial =
                         e.clientX - xActuel;
 
-
                     yInitial =
                         e.clientY - yActuel;
-
 
                 }
             );
@@ -690,22 +700,17 @@
                 "mousemove",
                 function(e) {
 
-
                     if (
                         !estEnTrainDeGlisser
                     ) return;
 
-
                     xActuel =
                         e.clientX - xInitial;
-
 
                     yActuel =
                         e.clientY - yInitial;
 
-
                     if (el) {
-
 
                         el.style.transform =
                             `translate3d(
@@ -714,9 +719,7 @@
                                 0
                             )`;
 
-
                     }
-
 
                 }
             );
@@ -739,4 +742,4 @@
 
 </body>
 
-    </html>
+            </html>
